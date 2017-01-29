@@ -10,6 +10,12 @@ namespace PythonInterpreter
     {
         static void Main(string[] args)
         {
+            while (true)
+            {
+                string text = Console.In.ReadLine();
+                Interpreter interpreter = new Interpreter(text);
+                interpreter.Expr();
+            }
         }
     }
 }
