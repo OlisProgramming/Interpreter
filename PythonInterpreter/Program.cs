@@ -13,8 +13,14 @@ namespace PythonInterpreter
             while (true)
             {
                 string text = Console.In.ReadLine();
-                Interpreter interpreter = new Interpreter(text);
-                interpreter.Expression();
+                Tokeniser tokeniser = new Tokeniser(text);
+                List<Token> tokens = tokeniser.Tokenise();
+
+                foreach (Token t in tokens)
+                    Console.WriteLine(t);
+
+                Interpreter interpreter = new Interpreter(tokens);
+                Console.WriteLine(interpreter.Expression());
             }
         }
     }
