@@ -16,6 +16,8 @@ namespace PythonInterpreter
         public Interpreter(string text)
         {
             Text = text;
+            if (text.Length == 0)
+                Error();
             CurrentChar = Text[0];
         }
 
@@ -45,7 +47,7 @@ namespace PythonInterpreter
             }
         }
 
-        public string GetNextInteger()
+        public string GetNextIntegerValue()
         {
             string result = "";
             while (CurrentChar != '\0' && char.IsDigit(CurrentChar))
@@ -67,7 +69,7 @@ namespace PythonInterpreter
                 }
                 else if (char.IsDigit(CurrentChar))
                 {
-                    return new Token(Token.TokenType.INTEGER, GetNextInteger());
+                    return new Token(Token.TokenType.INTEGER, GetNextIntegerValue());
                 }
                 switch (CurrentChar)
                 {
@@ -84,15 +86,16 @@ namespace PythonInterpreter
             return new Token(Token.TokenType.EOF, "");
         }
 
-        public void Eat(Token.TokenType type)
+        public Token Eat(Token.TokenType type)
         {
             if (CurrentToken.Type == type)
             {
-                CurrentToken = GetNextToken();
+                return CurrentToken = GetNextToken();
             }
             else
             {
                 Error();
+                return null;
             }
         }
 
@@ -100,31 +103,29 @@ namespace PythonInterpreter
         {
             CurrentToken = GetNextToken();
 
-            Token left = CurrentToken;
-            Eat(Token.TokenType.INTEGER);
+            Token tk = Eat(Token.TokenType.INTEGER);
+            int result = Convert.ToInt32(tk.Value);
 
-            Token op = CurrentToken;
-            if (op.Type == Token.TokenType.PLUS)
-                Eat(Token.TokenType.PLUS);
-            else
-                Eat(Token.TokenType.MINUS);
-
-            Token right = CurrentToken;
-            Eat(Token.TokenType.INTEGER);
-
-            int resulta, resultb;
-            if (!int.TryParse(left.Value, out resulta))
+            while (
+                CurrentToken.Type == Token.TokenType.PLUS ||
+                CurrentToken.Type == Token.TokenType.MINUS
+                )
             {
-                Error();
+                switch (CurrentToken.Type)
+                {
+                    case Token.TokenType.PLUS:
+                        Eat(Token.TokenType.PLUS);
+                        result += Convert.ToInt32(Eat(Token.TokenType.INTEGER).Value);
+                        break;
+
+                    case Token.TokenType.MINUS:
+                        Eat(Token.TokenType.MINUS);
+                        result -= Convert.ToInt32(Eat(Token.TokenType.INTEGER).Value);
+                        break;
+                }
             }
-            if (!int.TryParse(right.Value, out resultb))
-            {
-                Error();
-            }
-            Console.WriteLine(
-                op.Type == Token.TokenType.PLUS ?
-                resulta + resultb :
-                resulta - resultb);
+
+            Console.WriteLine(result);
         }
     }
 }
