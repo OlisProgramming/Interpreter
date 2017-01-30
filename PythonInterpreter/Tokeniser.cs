@@ -17,13 +17,15 @@ namespace PythonInterpreter
         {
             Text = text;
             if (text.Length == 0)
-                Error();
+                Error("File empty.", null);
             CurrentChar = Text[0];
         }
 
-        public void Error()
+        public void Error(string message, Token token_at)
         {
-            throw new Exception("Error tokenising input");
+            Console.WriteLine($"Error while tokenising.\n" + message);
+            Console.In.ReadLine();
+            Environment.Exit(1);
         }
 
         public void Advance()

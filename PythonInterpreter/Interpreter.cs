@@ -24,13 +24,15 @@ namespace PythonInterpreter
             }
             else
             {
-                Error();
+                Error($"Token type {type} was expected, but got {tokens[index].Type} instead.", tokens[index]);
             }
         }
 
-        public void Error()
+        public void Error(string message, Token token_at)
         {
-            throw new Exception("Error interpreting tokens");
+            Console.WriteLine("Error while interpreting.\n" + message);
+            Console.In.ReadLine();
+            Environment.Exit(1);
         }
     }
 }
