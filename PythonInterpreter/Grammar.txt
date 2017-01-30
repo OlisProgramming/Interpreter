@@ -21,7 +21,7 @@ IDENTIFIER:	LETTER (LETTER | DIGIT)*
 
 Number:		(MINUS | PLUS)? INTEGER
 
-ArithmeticUnit:					(Number) | (LPARENTH ArithmeticExpression RPARENTH)
+ArithmeticUnit:					Number | (LPARENTH ArithmeticExpression RPARENTH)
 ArithmeticComponentMulDiv:		ArithmeticUnit				((MUL | DIV)	ArithmeticUnit)*
 ArithmeticComponentPlusMinus:	ArithmeticComponentMulDiv	((PLUS | MINUS)	ArithmeticComponentMulDiv)*
 ArithmeticExpression:			ArithmeticComponentPlusMinus

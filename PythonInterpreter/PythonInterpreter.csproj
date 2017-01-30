@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InterpreterRulesArithmetic.cs" />
+    <Compile Include="InterpreterEnvironment.cs" />
     <Compile Include="Tokeniser.cs" />
     <Compile Include="Interpreter.cs" />
     <Compile Include="Program.cs" />
