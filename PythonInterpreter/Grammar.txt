@@ -1,0 +1,23 @@
+﻿// SUBTOKEN TERMINALS
+
+DIGIT:		"0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+
+// TOKEN TERMINALS
+
+PLUS:		"+"
+MINUS:		"-"
+MUL:		"*"
+DIV:		"/"
+PARENTH_OPEN:	"("
+PARENTH_CLOSE:	")"
+INTEGER:	DIGIT+
+
+
+// NON-TERMINALS
+
+Number:		INTEGER
+
+ArithmeticComponentMulDiv:		Number						((MUL | DIV)	Number)*
+ArithmeticComponentPlusMinus:	ArithmeticComponentMulDiv	((PLUS | MINUS)	ArithmeticComponentMulDiv)*
+ArithmeticExpression:			ArithmeticComponentPlusMinus

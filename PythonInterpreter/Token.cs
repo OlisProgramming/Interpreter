@@ -10,7 +10,7 @@ namespace PythonInterpreter
     {
         public enum TokenType
         {
-            INTEGER, PLUS, MINUS, EOF
+            INTEGER, PLUS, MINUS, MUL, DIV, EOF
         }
 
         public TokenType Type { get; set; }

@@ -20,7 +20,7 @@ namespace PythonInterpreter
                     Console.WriteLine(t);
 
                 Interpreter interpreter = new Interpreter(tokens);
-                Console.WriteLine(interpreter.Expression());
+                Console.WriteLine(interpreter.ArithmeticExpression());
             }
         }
     }

@@ -80,6 +80,14 @@ namespace PythonInterpreter
                     case '-':
                         Advance();
                         return new Token(Token.TokenType.MINUS, "-");
+
+                    case '*':
+                        Advance();
+                        return new Token(Token.TokenType.MUL, "*");
+
+                    case '/':
+                        Advance();
+                        return new Token(Token.TokenType.DIV, "/");
                 }
             }
 

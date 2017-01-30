@@ -33,12 +33,37 @@ namespace PythonInterpreter
             throw new Exception("Error interpreting tokens");
         }
 
-        /// <summary>
-        /// expression: factor ((PLUS | MINUS) factor)*
-        /// </summary>
-        public int Expression()
+        public double ArithmeticExpressionMulDiv()
         {
-            int result = Factor();
+            double result = Number();
+
+            while (
+                tokens[index].Type == Token.TokenType.MUL ||
+                tokens[index].Type == Token.TokenType.DIV
+                )
+            {
+                switch (tokens[index].Type)
+                {
+                    case Token.TokenType.MUL:
+                        Eat(Token.TokenType.MUL);
+                        result *= Number();
+                        
+                        break;
+
+                    case Token.TokenType.DIV:
+                        Eat(Token.TokenType.DIV);
+                        result /= Number();
+
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+        public double ArithmeticExpressionPlusMinus()
+        {
+            double result = ArithmeticExpressionMulDiv();
 
             while (
                 tokens[index].Type == Token.TokenType.PLUS ||
@@ -49,30 +74,33 @@ namespace PythonInterpreter
                 {
                     case Token.TokenType.PLUS:
                         Eat(Token.TokenType.PLUS);
-                        result += Factor();
-                        
+                        result += ArithmeticExpressionMulDiv();
+
                         break;
 
                     case Token.TokenType.MINUS:
                         Eat(Token.TokenType.MINUS);
-                        result -= Factor();
+                        result -= ArithmeticExpressionMulDiv();
 
                         break;
                 }
             }
 
             return result;
-            //Console.WriteLine(result);
         }
 
-        /// <summary>
-        /// factor: INTEGER
-        /// </summary>
-        public int Factor()
+        public double ArithmeticExpression()
+        {
+            double result = ArithmeticExpressionPlusMinus();
+
+            return result;
+        }
+
+        public double Number()
         {
             Token integer = tokens[index];
             Eat(Token.TokenType.INTEGER);
-            return Convert.ToInt32(integer.Value);
+            return Convert.ToDouble(integer.Value);
         }
     }
 }
