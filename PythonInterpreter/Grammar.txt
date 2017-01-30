@@ -1,6 +1,7 @@
 ﻿// SUBTOKEN TERMINALS
 
 DIGIT:		"0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+LETTER:		"a"->"z" | "A"->"Z"
 
 
 // TOKEN TERMINALS
@@ -12,6 +13,8 @@ DIV:		"/"
 LPARENTH:	"("
 RPARENTH:	")"
 INTEGER:	DIGIT+
+
+IDENTIFIER:	LETTER (LETTER | DIGIT)*
 
 
 // NON-TERMINALS

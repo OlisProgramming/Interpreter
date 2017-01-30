@@ -47,6 +47,17 @@ namespace PythonInterpreter
             }
         }
 
+        public string GetNextIdentifierValue()
+        {
+            string result = "";
+            while (CurrentChar != '\0' && char.IsLetterOrDigit(CurrentChar))
+            {
+                result += CurrentChar;
+                Advance();
+            }
+            return result;
+        }
+
         public string GetNextIntegerValue()
         {
             string result = "";
@@ -70,6 +81,10 @@ namespace PythonInterpreter
                 else if (char.IsDigit(CurrentChar))
                 {
                     return new Token(Token.TokenType.INTEGER, GetNextIntegerValue());
+                }
+                else if (char.IsLetter(CurrentChar))
+                {
+                    return new Token(Token.TokenType.IDENTIFIER, GetNextIdentifierValue());
                 }
                 switch (CurrentChar)
                 {
