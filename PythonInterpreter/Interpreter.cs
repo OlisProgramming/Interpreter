@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PythonInterpreter
 {
-    class Interpreter
+    partial class Interpreter
     {
         string Text { get; set; }
         int TextPos { get; set; }
@@ -19,6 +19,7 @@ namespace PythonInterpreter
             if (text.Length == 0)
                 Error();
             CurrentChar = Text[0];
+            CurrentToken = GetNextToken();
         }
 
         public void Error()
@@ -86,46 +87,16 @@ namespace PythonInterpreter
             return new Token(Token.TokenType.EOF, "");
         }
 
-        public Token Eat(Token.TokenType type)
+        public void Eat(Token.TokenType type)
         {
             if (CurrentToken.Type == type)
             {
-                return CurrentToken = GetNextToken();
+                CurrentToken = GetNextToken();
             }
             else
             {
                 Error();
-                return null;
             }
-        }
-
-        public void Expr()
-        {
-            CurrentToken = GetNextToken();
-
-            Token tk = Eat(Token.TokenType.INTEGER);
-            int result = Convert.ToInt32(tk.Value);
-
-            while (
-                CurrentToken.Type == Token.TokenType.PLUS ||
-                CurrentToken.Type == Token.TokenType.MINUS
-                )
-            {
-                switch (CurrentToken.Type)
-                {
-                    case Token.TokenType.PLUS:
-                        Eat(Token.TokenType.PLUS);
-                        result += Convert.ToInt32(Eat(Token.TokenType.INTEGER).Value);
-                        break;
-
-                    case Token.TokenType.MINUS:
-                        Eat(Token.TokenType.MINUS);
-                        result -= Convert.ToInt32(Eat(Token.TokenType.INTEGER).Value);
-                        break;
-                }
-            }
-
-            Console.WriteLine(result);
         }
     }
 }

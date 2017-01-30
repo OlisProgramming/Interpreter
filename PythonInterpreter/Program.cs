@@ -14,7 +14,7 @@ namespace PythonInterpreter
             {
                 string text = Console.In.ReadLine();
                 Interpreter interpreter = new Interpreter(text);
-                interpreter.Expr();
+                interpreter.Expression();
             }
         }
     }
