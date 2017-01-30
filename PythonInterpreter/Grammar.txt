@@ -16,7 +16,7 @@ INTEGER:	DIGIT+
 
 // NON-TERMINALS
 
-Number:		INTEGER
+Number:		(MINUS | PLUS)? INTEGER
 
 ArithmeticUnit:					(Number) | (LPARENTH ArithmeticExpression RPARENTH)
 ArithmeticComponentMulDiv:		ArithmeticUnit				((MUL | DIV)	ArithmeticUnit)*

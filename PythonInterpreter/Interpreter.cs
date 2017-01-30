@@ -114,9 +114,22 @@ namespace PythonInterpreter
 
         public double Number()
         {
+            bool signIsPos = true;
+
+            if (tokens[index].Type == Token.TokenType.PLUS)
+            {
+                signIsPos = true;
+                index++;
+            }
+            else if (tokens[index].Type == Token.TokenType.MINUS)
+            {
+                signIsPos = false;
+                index++;
+            }
+
             Token integer = tokens[index];
             Eat(Token.TokenType.INTEGER);
-            return Convert.ToDouble(integer.Value);
+            return (signIsPos? 1 : -1) * Convert.ToDouble(integer.Value);
         }
     }
 }
