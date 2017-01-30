@@ -88,6 +88,14 @@ namespace PythonInterpreter
                     case '/':
                         Advance();
                         return new Token(Token.TokenType.DIV, "/");
+
+                    case '(':
+                        Advance();
+                        return new Token(Token.TokenType.LPARENTH, "(");
+
+                    case ')':
+                        Advance();
+                        return new Token(Token.TokenType.RPARENTH, ")");
                 }
             }
 

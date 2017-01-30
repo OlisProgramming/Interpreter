@@ -35,7 +35,7 @@ namespace PythonInterpreter
 
         public double ArithmeticExpressionMulDiv()
         {
-            double result = Number();
+            double result = ArithmeticUnit();
 
             while (
                 tokens[index].Type == Token.TokenType.MUL ||
@@ -46,13 +46,13 @@ namespace PythonInterpreter
                 {
                     case Token.TokenType.MUL:
                         Eat(Token.TokenType.MUL);
-                        result *= Number();
+                        result *= ArithmeticUnit();
                         
                         break;
 
                     case Token.TokenType.DIV:
                         Eat(Token.TokenType.DIV);
-                        result /= Number();
+                        result /= ArithmeticUnit();
 
                         break;
                 }
@@ -93,6 +93,22 @@ namespace PythonInterpreter
         {
             double result = ArithmeticExpressionPlusMinus();
 
+            return result;
+        }
+
+        public double ArithmeticUnit()
+        {
+            double result;
+            if (tokens[index].Type == Token.TokenType.LPARENTH)
+            {
+                Eat(Token.TokenType.LPARENTH);
+                result = ArithmeticExpression();
+                Eat(Token.TokenType.RPARENTH);
+            }
+            else
+            {
+                result = Number();
+            }
             return result;
         }
 
