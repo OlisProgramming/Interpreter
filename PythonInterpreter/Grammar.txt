@@ -23,5 +23,5 @@ Number:		(MINUS | PLUS)? INTEGER
 
 ArithmeticUnit:					Number | (LPARENTH ArithmeticExpression RPARENTH)
 ArithmeticComponentMulDiv:		ArithmeticUnit				((MUL | DIV)	ArithmeticUnit)*
-ArithmeticComponentPlusMinus:	ArithmeticComponentMulDiv	((PLUS | MINUS)	ArithmeticComponentMulDiv)*
-ArithmeticExpression:			ArithmeticComponentPlusMinus
+ArithmeticComponentAddSub:		ArithmeticComponentMulDiv	((PLUS | MINUS)	ArithmeticComponentMulDiv)*
+ArithmeticExpression:			ArithmeticComponentAddSub

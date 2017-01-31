@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PythonInterpreter
 {
-    partial class Interpreter
+    partial class Parser
     {
         private List<Token> tokens;
         private int index = 0;
         private InterpreterEnvironment env;
 
-        public Interpreter(List<Token> tokens)
+        public Parser(List<Token> tokens)
         {
             this.tokens = tokens;
         }

@@ -92,11 +92,11 @@ namespace PythonInterpreter
                 {
                     case '+':
                         Advance();
-                        return new Token(Token.TokenType.PLUS, "+");
+                        return new Token(Token.TokenType.ADD, "+");
 
                     case '-':
                         Advance();
-                        return new Token(Token.TokenType.MINUS, "-");
+                        return new Token(Token.TokenType.SUB, "-");
 
                     case '*':
                         Advance();

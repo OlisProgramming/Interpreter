@@ -11,7 +11,7 @@ namespace PythonInterpreter
         public enum TokenType
         {
             INTEGER,
-            PLUS, MINUS, MUL, DIV,
+            ADD, SUB, MUL, DIV,
             LPARENTH, RPARENTH,
             IDENTIFIER,
             EOF

@@ -16,11 +16,15 @@ namespace PythonInterpreter
                 Tokeniser tokeniser = new Tokeniser(text);
                 List<Token> tokens = tokeniser.Tokenise();
 
+                Console.WriteLine("TOKENS:");
                 foreach (Token t in tokens)
                     Console.WriteLine(t);
 
-                Interpreter interpreter = new Interpreter(tokens);
-                Console.WriteLine(interpreter.ArithmeticExpression());
+                Parser parser = new Parser(tokens);
+                Node expr = parser.ArithmeticExpression();
+
+                Console.WriteLine("ABSTRACT SYNTAX TREE:");
+                Console.WriteLine(expr);
             }
         }
     }
