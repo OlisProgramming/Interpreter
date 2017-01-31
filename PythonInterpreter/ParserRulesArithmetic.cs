@@ -95,28 +95,22 @@ namespace PythonInterpreter
 
         public Node Number()
         {
-            bool signIsPos = true;
+            Token tk = tokens[index];
 
             if (tokens[index].Type == Token.TokenType.ADD)
             {
-                signIsPos = true;
-                index++;
+                Eat(Token.TokenType.ADD);
+                return new UnaryPlusNode(tk, Number());
             }
             else if (tokens[index].Type == Token.TokenType.SUB)
             {
-                signIsPos = false;
-                index++;
+                Eat(Token.TokenType.SUB);
+                return new UnaryMinusNode(tk, Number());
             }
 
-            Token integer = tokens[index];
             Eat(Token.TokenType.INTEGER);
 
-            NumberNode node = new NumberNode(integer);
-
-            if (!signIsPos)
-            {
-                node.Value *= -1;
-            }
+            NumberNode node = new NumberNode(tk);
 
             return node;
         }

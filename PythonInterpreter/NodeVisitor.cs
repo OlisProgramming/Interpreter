@@ -20,7 +20,11 @@ namespace PythonInterpreter
                 return VisitDivNode(node as DivNode);
             if (node is NumberNode)
                 return VisitNumberNode(node as NumberNode);
-            throw new Exception($"Error while visiting node {node}. There was no Visit method for this node.");
+            if (node is UnaryPlusNode)
+                return VisitUnaryPlusNode(node as UnaryPlusNode);
+            if (node is UnaryMinusNode)
+                return VisitUnaryMinusNode(node as UnaryMinusNode);
+            throw new Exception($"Error while visiting node {node} of type {node.GetType().Name}. There was no Visit method for this node.");
         }
 
         private double VisitAddNode(AddNode node)
@@ -46,6 +50,16 @@ namespace PythonInterpreter
         private double VisitNumberNode(NumberNode node)
         {
             return node.Value;
+        }
+
+        private double VisitUnaryPlusNode(UnaryPlusNode node)
+        {
+            return Visit(node.Child);
+        }
+
+        private double VisitUnaryMinusNode(UnaryMinusNode node)
+        {
+            return -Visit(node.Child);
         }
     }
 }

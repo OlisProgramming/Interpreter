@@ -26,8 +26,8 @@ namespace PythonInterpreter
                 Console.WriteLine("ABSTRACT SYNTAX TREE:");
                 Console.WriteLine(expr);
 
-                NodeVisitor visitor = new NodeVisitor();
-                double result = visitor.Visit(expr);
+                Interpreter interpreter = new Interpreter();
+                double result = interpreter.Visit(expr);
 
                 Console.WriteLine("VALUE OF TREE:");
                 Console.WriteLine(result);

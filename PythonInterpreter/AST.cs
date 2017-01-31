@@ -29,6 +29,39 @@ namespace PythonInterpreter
 
     //////////////
 
+    class UnaryOperationNode : Node
+    {
+        public Node Child { get; set; }
+
+        public UnaryOperationNode(Token token, Node child) : base(token)
+        {
+            Child = child;
+        }
+
+        public override string ToString()
+        {
+            return Token.Value + "{" + Child.ToString() + "}";
+        }
+    }
+
+    class UnaryPlusNode : UnaryOperationNode
+    {
+        public UnaryPlusNode(Token token, Node child) : base(token, child)
+        {
+
+        }
+    }
+
+    class UnaryMinusNode : UnaryOperationNode
+    {
+        public UnaryMinusNode(Token token, Node child) : base(token, child)
+        {
+
+        }
+    }
+
+    //////////////
+
     class BinaryOperationNode : Node
     {
         public Node Left { get; set; }

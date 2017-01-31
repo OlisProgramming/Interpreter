@@ -19,7 +19,7 @@ IDENTIFIER:	LETTER (LETTER | DIGIT)*
 
 // NON-TERMINALS
 
-Number:		(MINUS | PLUS)? INTEGER
+Number:		((MINUS | PLUS) Number) | (INTEGER)
 
 ArithmeticUnit:					Number | (LPARENTH ArithmeticExpression RPARENTH)
 ArithmeticComponentMulDiv:		ArithmeticUnit				((MUL | DIV)	ArithmeticUnit)*
