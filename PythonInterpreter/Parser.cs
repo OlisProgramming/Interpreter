@@ -10,7 +10,7 @@ namespace PythonInterpreter
     {
         private List<Token> tokens;
         private int index = 0;
-        private InterpreterEnvironment env;
+        //private InterpreterEnvironment env;
 
         public Parser(List<Token> tokens)
         {
@@ -25,15 +25,12 @@ namespace PythonInterpreter
             }
             else
             {
-                Error($"Token type {type} was expected, but got {tokens[index].Type} instead.", tokens[index]);
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.PARSER_EXPECTED_DIFFERENT_TOKEN,
+                    tokens[index],
+                    type.ToString(), tokens[index].Type.ToString());
+                //Error($"Token type {type} was expected, but got {tokens[index].Type} instead.", tokens[index]);
             }
-        }
-
-        public void Error(string message, Token token_at)
-        {
-            Console.WriteLine("Error while interpreting.\n" + message);
-            Console.In.ReadLine();
-            Environment.Exit(1);
         }
     }
 }

@@ -10,28 +10,38 @@ namespace PythonInterpreter
     {
         static void Main(string[] args)
         {
-            while (true)
+            try
             {
-                string text = Console.In.ReadLine();
-                Tokeniser tokeniser = new Tokeniser(text);
-                List<Token> tokens = tokeniser.Tokenise();
+                while (true)
+                {
+                    string text = Console.In.ReadLine();
+                    Tokeniser tokeniser = new Tokeniser(text);
+                    List<Token> tokens = tokeniser.Tokenise();
 
-                Console.WriteLine("TOKENS:");
-                foreach (Token t in tokens)
-                    Console.WriteLine(t);
+                    Console.WriteLine("TOKENS:");
+                    foreach (Token t in tokens)
+                        Console.WriteLine(t);
 
-                Parser parser = new Parser(tokens);
-                Node expr = parser.ArithmeticExpression();
+                    Parser parser = new Parser(tokens);
+                    Node expr = parser.ArithmeticExpression();
 
-                Console.WriteLine("ABSTRACT SYNTAX TREE:");
-                Console.WriteLine(expr);
+                    Console.WriteLine("ABSTRACT SYNTAX TREE:");
+                    Console.WriteLine(expr);
 
-                Interpreter interpreter = new Interpreter();
-                double result = interpreter.Visit(expr);
+                    Interpreter interpreter = new Interpreter();
+                    double result = interpreter.Visit(expr);
 
-                Console.WriteLine("VALUE OF TREE:");
-                Console.WriteLine(result);
+                    Console.WriteLine("VALUE OF TREE:");
+                    Console.WriteLine(result);
+                }
             }
+            catch (InterpreterException ex)
+            {
+                Console.Error.WriteLine(ex);
+            }
+
+            Console.Write("Press any key to continue...");
+            Console.ReadKey();
         }
     }
 }

@@ -17,15 +17,10 @@ namespace PythonInterpreter
         {
             Text = text;
             if (text.Length == 0)
-                Error("File empty.", null);
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.TOKENISER_FILE_EMPTY,
+                    null);
             CurrentChar = Text[0];
-        }
-
-        public void Error(string message, Token token_at)
-        {
-            Console.WriteLine($"Error while tokenising.\n" + message);
-            Console.In.ReadLine();
-            Environment.Exit(1);
         }
 
         public void Advance()
@@ -113,6 +108,11 @@ namespace PythonInterpreter
                     case ')':
                         Advance();
                         return new Token(Token.TokenType.RPARENTH, ")");
+
+                    default:
+                        throw new InterpreterException(
+                            InterpreterException.InterpreterExceptionType.TOKENISER_UNRECOGNISED_TOKEN,
+                            new Token(Token.TokenType.EOF, new string(CurrentChar, 1)));
                 }
             }
 
