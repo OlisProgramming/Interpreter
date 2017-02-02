@@ -8,11 +8,52 @@ namespace PythonInterpreter
 {
     abstract class Variable
     {
+        private string typeName;
+        public string TypeName { get; }
+
+        public Variable(string typeName)
+        {
+            this.typeName = typeName;
+        }
+
         public Variable Add(Variable other)
         {
-            return AddImpl(other);
+            Variable this_result = AddImpl(other);  // Should return null if code path is unavailable.
+            Variable result = this_result ?? other.AddImpl(this);
+
+            return result;
         }
 
         public abstract Variable AddImpl(Variable other);
+
+        public Variable Sub(Variable other)
+        {
+            Variable this_result = SubImpl(other);
+            Variable result = this_result ?? other.SubImpl(this);
+
+            return result;
+        }
+
+        public abstract Variable SubImpl(Variable other);
+
+        public Variable Mul(Variable other)
+        {
+            Variable this_result = MulImpl(other);
+            Variable result = this_result ?? other.MulImpl(this);
+
+            return result;
+        }
+
+        public abstract Variable MulImpl(Variable other);
+
+        public Variable Div(Variable other)
+        {
+            Variable this_result = DivImpl(other);
+            Variable result = this_result ?? other.DivImpl(this);
+
+            return result;
+        }
+
+        public abstract Variable DivImpl(Variable other);
     }
 }
