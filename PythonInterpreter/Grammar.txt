@@ -25,3 +25,5 @@ ArithmeticUnit:					Number | (LPARENTH ArithmeticExpression RPARENTH)
 ArithmeticComponentMulDiv:		ArithmeticUnit				((MUL | DIV)	ArithmeticUnit)*
 ArithmeticComponentAddSub:		ArithmeticComponentMulDiv	((PLUS | MINUS)	ArithmeticComponentMulDiv)*
 ArithmeticExpression:			ArithmeticComponentAddSub
+
+AssignmentExpression:			IDENTIFIER ASSIGN ArithmeticExpression

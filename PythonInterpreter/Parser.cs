@@ -10,7 +10,6 @@ namespace PythonInterpreter
     {
         private List<Token> tokens;
         private int index = 0;
-        //private InterpreterEnvironment env;
 
         public Parser(List<Token> tokens)
         {

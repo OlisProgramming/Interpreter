@@ -109,6 +109,10 @@ namespace PythonInterpreter
                         Advance();
                         return new Token(Token.TokenType.RPARENTH, ")");
 
+                    case '=':
+                        Advance();
+                        return new Token(Token.TokenType.ASSIGN, "=");
+
                     default:
                         throw new InterpreterException(
                             InterpreterException.InterpreterExceptionType.TOKENISER_UNRECOGNISED_TOKEN,

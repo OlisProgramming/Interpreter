@@ -8,16 +8,16 @@ namespace PythonInterpreter
 {
     class InterpreterEnvironment
     {
-        private Dictionary<string, double> variablesNumeric;
+        private Dictionary<string, Variable> variables;
 
         public InterpreterEnvironment()
         {
-            variablesNumeric = new Dictionary<string, double>();
+            variables = new Dictionary<string, Variable>();
         }
 
         public bool NameExists(string name)
         {
-            return variablesNumeric.ContainsKey(name);
+            return variables.ContainsKey(name);
         }
 
         public bool NameFree(string name)
@@ -25,14 +25,14 @@ namespace PythonInterpreter
             return !NameExists(name);
         }
 
-        public void SetVariableNumeric(string name, double value)
+        public void SetVariable(string name, Variable value)
         {
-            variablesNumeric[name] = value;
+            variables[name] = value;
         }
 
-        public double GetVariableNumeric(string name)
+        public Variable GetVariable(string name)
         {
-            return variablesNumeric[name];
+            return variables[name];
         }
     }
 }

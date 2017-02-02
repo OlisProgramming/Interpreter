@@ -44,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AST.cs" />
-    <Compile Include="Interpreter.cs" />
     <Compile Include="InterpreterException.cs" />
-    <Compile Include="NodeVisitor.cs" />
+    <Compile Include="Interpreter.cs" />
+    <Compile Include="ParserRulesAssignment.cs" />
     <Compile Include="ParserRulesArithmetic.cs" />
     <Compile Include="InterpreterEnvironment.cs" />
     <Compile Include="Tokeniser.cs" />

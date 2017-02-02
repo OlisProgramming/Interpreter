@@ -111,6 +111,21 @@ namespace PythonInterpreter
         }
     }
 
+    //////////////
+
+    /// <summary>
+    /// Assigns value of Right to variable Left.
+    /// </summary>
+    class AssignNode : BinaryOperationNode
+    {
+        public AssignNode(Token token, Node left, Node right) : base(token, left, right)
+        {
+
+        }
+    }
+
+    //////////////
+
     class NumberNode : Leaf
     {
         public Variable Value { get; set; }
@@ -123,6 +138,21 @@ namespace PythonInterpreter
         public override string ToString()
         {
             return Token.Value + "{" + Value.ToString() + "}";
+        }
+    }
+
+    class IdentifierNode : Leaf
+    {
+        public string Value { get; set; }
+
+        public IdentifierNode(Token token) : base(token)
+        {
+            Value = token.Value;
+        }
+
+        public override string ToString()
+        {
+            return Token.Value + "{" + Value + "}";
         }
     }
 }

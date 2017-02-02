@@ -23,7 +23,7 @@ namespace PythonInterpreter
                         Console.WriteLine(t);
 
                     Parser parser = new Parser(tokens);
-                    Node expr = parser.ArithmeticExpression();
+                    Node expr = parser.AssignmentExpression();
 
                     Console.WriteLine("ABSTRACT SYNTAX TREE:");
                     Console.WriteLine(expr);
