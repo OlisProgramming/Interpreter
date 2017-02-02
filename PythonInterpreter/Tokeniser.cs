@@ -113,6 +113,10 @@ namespace PythonInterpreter
                         Advance();
                         return new Token(Token.TokenType.ASSIGN, "=");
 
+                    case ';':
+                        Advance();
+                        return new Token(Token.TokenType.SEMICOLON, ";");
+
                     default:
                         throw new InterpreterException(
                             InterpreterException.InterpreterExceptionType.TOKENISER_UNRECOGNISED_TOKEN,

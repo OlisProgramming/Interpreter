@@ -13,7 +13,7 @@ namespace PythonInterpreter
             INTEGER,
             ADD, SUB, MUL, DIV,
             LPARENTH, RPARENTH,
-            ASSIGN,
+            ASSIGN, SEMICOLON,
             IDENTIFIER,
             EOF
         }

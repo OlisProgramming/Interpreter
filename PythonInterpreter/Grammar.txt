@@ -12,6 +12,8 @@ MUL:		"*"
 DIV:		"/"
 LPARENTH:	"("
 RPARENTH:	")"
+ASSIGN:		"="
+SEMICOLON:	";"
 INTEGER:	DIGIT+
 
 IDENTIFIER:	LETTER (LETTER | DIGIT)*
@@ -27,3 +29,7 @@ ArithmeticComponentAddSub:		ArithmeticComponentMulDiv	((PLUS | MINUS)	Arithmetic
 ArithmeticExpression:			ArithmeticComponentAddSub
 
 AssignmentExpression:			IDENTIFIER ASSIGN ArithmeticExpression
+
+Statement:						(AssignmentExpression | ArithmeticExpression) SEMICOLON
+
+Program:						Statement+

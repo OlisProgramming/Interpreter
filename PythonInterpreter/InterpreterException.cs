@@ -15,7 +15,9 @@ namespace PythonInterpreter
             TOKENISER_FILE_EMPTY,
             TOKENISER_UNRECOGNISED_TOKEN,
 
-            PARSER_EXPECTED_DIFFERENT_TOKEN
+            PARSER_EXPECTED_DIFFERENT_TOKEN,
+
+            INTERPRETER_NO_VISIT_METHOD,
         }
 
         public InterpreterExceptionType Error { get; set; }
@@ -45,6 +47,10 @@ namespace PythonInterpreter
 
                 case InterpreterExceptionType.PARSER_EXPECTED_DIFFERENT_TOKEN:
                     msg += $"Parser expected a token of type {Details[0]} but received a token of {Details[1]}.";
+                    break;
+
+                case InterpreterExceptionType.INTERPRETER_NO_VISIT_METHOD:
+                    msg += $"Error while visiting node {Details[0]} of type {Details[1]}. There was no Visit method for this node.";
                     break;
 
                 default:

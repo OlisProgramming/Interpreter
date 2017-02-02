@@ -37,7 +37,13 @@ namespace PythonInterpreter
             if (node is AssignNode)
                 return VisitAssignNode(node as AssignNode);
 
-            throw new Exception($"Error while visiting node {node} of type {node.GetType().Name}. There was no Visit method for this node.");
+            if (node is ProgramNode)
+                return VisitProgramNode(node as ProgramNode);
+
+            throw new InterpreterException(
+                InterpreterException.InterpreterExceptionType.INTERPRETER_NO_VISIT_METHOD,
+                node.Token,
+                node.ToString(), node.GetType().Name);
         }
 
         private Variable VisitAddNode(AddNode node)
@@ -80,6 +86,18 @@ namespace PythonInterpreter
             Variable v = Visit(node.Right);
             env.SetVariable((node.Left as IdentifierNode).Value, v);
             return v;
+        }
+
+        private Variable VisitProgramNode(ProgramNode node)
+        {
+            foreach (Node statement in node.Statements)
+            {
+                Variable val = Visit(statement);
+                Console.Write("Line: ");
+                Console.WriteLine(val);
+            }
+
+            return null;
         }
     }
 }

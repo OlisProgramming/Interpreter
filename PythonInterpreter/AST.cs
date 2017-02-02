@@ -155,4 +155,22 @@ namespace PythonInterpreter
             return Token.Value + "{" + Value + "}";
         }
     }
+
+    //////////////
+
+    class ProgramNode : Node
+    {
+        private List<Node> statements;
+        public List<Node> Statements { get { return statements; } }
+
+        public ProgramNode(Token token) : base(token)
+        {
+            statements = new List<Node>();
+        }
+
+        public void AddStatement(Node statement)
+        {
+            Statements.Add(statement);
+        }
+    }
 }

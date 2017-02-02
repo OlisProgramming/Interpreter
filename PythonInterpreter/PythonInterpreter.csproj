@@ -49,6 +49,7 @@
     <Compile Include="ParserRulesAssignment.cs" />
     <Compile Include="ParserRulesArithmetic.cs" />
     <Compile Include="InterpreterEnvironment.cs" />
+    <Compile Include="ParserRulesProgram.cs" />
     <Compile Include="Tokeniser.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Program.cs" />
