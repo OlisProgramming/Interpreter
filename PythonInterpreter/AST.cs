@@ -172,5 +172,17 @@ namespace PythonInterpreter
         {
             Statements.Add(statement);
         }
+
+        public override string ToString()
+        {
+            string val = "{\n";
+
+            foreach (Node statement in Statements)
+            {
+                val += statement + "\n";
+            }
+
+            return val + "}";
+        }
     }
 }
