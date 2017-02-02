@@ -8,7 +8,7 @@ namespace PythonInterpreter
 {
     class NodeVisitor
     {
-        public double Visit(Node node)
+        public Variable Visit(Node node)
         {
             if (node is AddNode)
                 return VisitAddNode(node as AddNode);
@@ -27,39 +27,39 @@ namespace PythonInterpreter
             throw new Exception($"Error while visiting node {node} of type {node.GetType().Name}. There was no Visit method for this node.");
         }
 
-        private double VisitAddNode(AddNode node)
+        private Variable VisitAddNode(AddNode node)
         {
             return Visit(node.Left) + Visit(node.Right);
         }
 
-        private double VisitSubNode(SubNode node)
+        private Variable VisitSubNode(SubNode node)
         {
             return Visit(node.Left) - Visit(node.Right);
         }
 
-        private double VisitMulNode(MulNode node)
+        private Variable VisitMulNode(MulNode node)
         {
             return Visit(node.Left) * Visit(node.Right);
         }
 
-        private double VisitDivNode(DivNode node)
+        private Variable VisitDivNode(DivNode node)
         {
             return Visit(node.Left) / Visit(node.Right);
         }
 
-        private double VisitNumberNode(NumberNode node)
+        private Variable VisitNumberNode(NumberNode node)
         {
             return node.Value;
         }
 
-        private double VisitUnaryPlusNode(UnaryPlusNode node)
+        private Variable VisitUnaryPlusNode(UnaryPlusNode node)
         {
             return Visit(node.Child);
         }
 
-        private double VisitUnaryMinusNode(UnaryMinusNode node)
+        private Variable VisitUnaryMinusNode(UnaryMinusNode node)
         {
-            return -Visit(node.Child);
+            return Visit(node.Child) * new VariableDouble(-1.0);  // TODO unary minus
         }
     }
 }

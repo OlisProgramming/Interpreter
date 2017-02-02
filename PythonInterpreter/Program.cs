@@ -29,7 +29,7 @@ namespace PythonInterpreter
                     Console.WriteLine(expr);
 
                     Interpreter interpreter = new Interpreter();
-                    double result = interpreter.Visit(expr);
+                    Variable result = interpreter.Visit(expr);
 
                     Console.WriteLine("VALUE OF TREE:");
                     Console.WriteLine(result);

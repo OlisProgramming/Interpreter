@@ -23,7 +23,10 @@ namespace PythonInterpreter
 
             return result;
         }
-
+        public static Variable operator +(Variable self, Variable other)
+        {
+            return self.Add(other);
+        }
         public abstract Variable AddImpl(Variable other);
 
         public Variable Sub(Variable other)
@@ -33,7 +36,10 @@ namespace PythonInterpreter
 
             return result;
         }
-
+        public static Variable operator -(Variable self, Variable other)
+        {
+            return self.Sub(other);
+        }
         public abstract Variable SubImpl(Variable other);
 
         public Variable Mul(Variable other)
@@ -43,7 +49,10 @@ namespace PythonInterpreter
 
             return result;
         }
-
+        public static Variable operator *(Variable self, Variable other)
+        {
+            return self.Mul(other);
+        }
         public abstract Variable MulImpl(Variable other);
 
         public Variable Div(Variable other)
@@ -53,7 +62,10 @@ namespace PythonInterpreter
 
             return result;
         }
-
+        public static Variable operator /(Variable self, Variable other)
+        {
+            return self.Div(other);
+        }
         public abstract Variable DivImpl(Variable other);
     }
 }

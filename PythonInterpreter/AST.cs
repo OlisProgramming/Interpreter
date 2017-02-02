@@ -113,11 +113,11 @@ namespace PythonInterpreter
 
     class NumberNode : Leaf
     {
-        public double Value { get; set; }
+        public Variable Value { get; set; }
 
         public NumberNode(Token token) : base(token)
         {
-            Value = Convert.ToDouble(token.Value);
+            Value = new VariableDouble(Convert.ToDouble(token.Value));
         }
 
         public override string ToString()

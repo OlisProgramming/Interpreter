@@ -56,5 +56,10 @@ namespace PythonInterpreter
             }
             return new VariableDouble(Value / otherDouble.Value);
         }
+
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 }
