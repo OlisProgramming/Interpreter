@@ -94,6 +94,15 @@ namespace PythonInterpreter
             {
                 node = Number();
             }
+
+            while (tokens[index].Type == Token.TokenType.CAST)
+            {
+                Eat(Token.TokenType.CAST);
+                string id = tokens[index].Value;
+                Eat(Token.TokenType.IDENTIFIER);
+                node = new CastNode(tokens[index-1], node, id);
+            }
+
             return node;
         }
 

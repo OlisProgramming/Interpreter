@@ -100,6 +100,11 @@ namespace PythonInterpreter
 
                     case '-':
                         Advance();
+                        if (CurrentChar == '>')
+                        {
+                            Advance();
+                            return new Token(Token.TokenType.CAST, "->");
+                        }
                         return new Token(Token.TokenType.SUB, "-");
 
                     case '*':

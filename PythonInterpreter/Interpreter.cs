@@ -40,6 +40,8 @@ namespace PythonInterpreter
                 return VisitAssignNode(node as AssignNode);
             if (node is PrintNode)
                 return VisitPrintNode(node as PrintNode);
+            if (node is CastNode)
+                return VisitCastNode(node as CastNode);
 
             if (node is ProgramNode)
                 return VisitProgramNode(node as ProgramNode);
@@ -112,6 +114,12 @@ namespace PythonInterpreter
             }
 
             return null;
+        }
+
+        private Variable VisitCastNode(CastNode node)
+        {
+            Variable val = Visit(node.Child);
+            return val;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace PythonInterpreter
 
         public VariableDouble() : this(0.0) { }
 
-        public VariableDouble(double value) : base("Double")
+        public VariableDouble(double value) : base("double")
         {
             Value = value;
         }
@@ -55,6 +55,11 @@ namespace PythonInterpreter
                 //throw new InterpreterException()
             }
             return new VariableDouble(Value / otherDouble.Value);
+        }
+
+        public override Variable CastImpl(string typeToCast)
+        {
+            throw new NotImplementedException();
         }
 
         public override string ToString()

@@ -193,4 +193,14 @@ namespace PythonInterpreter
 
         }
     }
+
+    class CastNode : UnaryOperationNode
+    {
+        public string IDToCast { get; set; }
+
+        public CastNode(Token token, Node child, string id) : base(token, child)
+        {
+            IDToCast = id;
+        }
+    }
 }

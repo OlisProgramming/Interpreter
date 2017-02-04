@@ -15,6 +15,7 @@ RPARENTH:	")"
 ASSIGN:		"="
 SEMICOLON:	";"
 TMP_OUT:	":"  // Temporary print statement
+CAST:		"->"
 NUMBER:		(DIGIT+) ['.' DIGIT*]
 
 IDENTIFIER:	LETTER (LETTER | DIGIT)*
@@ -24,7 +25,7 @@ IDENTIFIER:	LETTER (LETTER | DIGIT)*
 
 Number:		((MINUS | PLUS) Number) | (NUMBER)
 
-ArithmeticUnit:					Number | IDENTIFIER | (LPARENTH ArithmeticExpression RPARENTH)
+ArithmeticUnit:					(Number | IDENTIFIER | (LPARENTH ArithmeticExpression RPARENTH)) (CAST IDENTIFIER)*
 ArithmeticComponentMulDiv:		ArithmeticUnit				((MUL | DIV)	ArithmeticUnit)*
 ArithmeticComponentAddSub:		ArithmeticComponentMulDiv	((PLUS | MINUS)	ArithmeticComponentMulDiv)*
 ArithmeticExpression:			ArithmeticComponentAddSub

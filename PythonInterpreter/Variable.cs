@@ -67,5 +67,15 @@ namespace PythonInterpreter
             return self.Div(other);
         }
         public abstract Variable DivImpl(Variable other);
+
+        ///////////////
+
+        public Variable Cast(string typeToCast)
+        {
+            if (typeName != typeToCast)
+                return CastImpl(typeToCast);
+            return this;
+        }
+        public abstract Variable CastImpl(string typeToCast);
     }
 }
