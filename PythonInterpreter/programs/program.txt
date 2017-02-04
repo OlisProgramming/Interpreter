@@ -1,11 +1,17 @@
 {
-	if false  {
-		:true;
+	a = 2;
+	b = 3;
+	c = 3;
 
-	} else if 0 {
-		:0;
+	: a * b * c;
+	: a;
+	: b;
+	: c;
 
-	} else {
-		:false;
-	}
+	: b < c;
+	: b <= c;
+	: a > c;
+	: b >= c;
+	: b == c;
+	: b != c;
 }

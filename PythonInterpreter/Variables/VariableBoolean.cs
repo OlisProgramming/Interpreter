@@ -49,5 +49,45 @@ namespace PythonInterpreter.Variables
         {
             return Value ? "true" : "false";
         }
+
+        public override Variable UnaryPlusImpl(Variable other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Variable UnaryMinusImpl(Variable other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Variable LessThanImpl(Variable other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Variable GreaterThanImpl(Variable other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Variable LessThanOrEqualImpl(Variable other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Variable GreaterThanOrEqualImpl(Variable other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Variable EqualImpl(Variable other)
+        {
+            return new VariableBoolean(Value == (other.Cast("boolean") as VariableBoolean).Value);
+        }
+
+        public override Variable NotEqualImpl(Variable other)
+        {
+            return new VariableBoolean(Value != (other.Cast("boolean") as VariableBoolean).Value);
+        }
     }
 }

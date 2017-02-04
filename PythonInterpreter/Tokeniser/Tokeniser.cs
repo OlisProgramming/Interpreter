@@ -139,7 +139,23 @@ namespace PythonInterpreter.TokeniserNamespace
 
                     case '=':
                         Advance();
+                        if (CurrentChar == '=')
+                        {
+                            Advance();
+                            return new Token(Token.TokenType.EQUAL, "==");
+                        }
                         return new Token(Token.TokenType.ASSIGN, "=");
+
+                    case '!':
+                        Advance();
+                        if (CurrentChar == '=')
+                        {
+                            Advance();
+                            return new Token(Token.TokenType.NOT_EQUAL, "!=");
+                        }
+                        throw new InterpreterException(
+                            InterpreterException.InterpreterExceptionType.TOKENISER_UNRECOGNISED_TOKEN,
+                            new Token(Token.TokenType.EOF, new string(CurrentChar, 1)));
 
                     case ';':
                         Advance();
@@ -148,6 +164,25 @@ namespace PythonInterpreter.TokeniserNamespace
                     case ':':
                         Advance();
                         return new Token(Token.TokenType.OUT, ":");
+
+                    case '<':
+                        Advance();
+                        if (CurrentChar == '=')
+                        {
+                            Advance();
+                            return new Token(Token.TokenType.LESS_OR_EQUAL, "<=");
+                        }
+                        return new Token(Token.TokenType.LESS_THAN, "<");
+
+                    case '>':
+                        Advance();
+                        if (CurrentChar == '=')
+                        {
+                            Advance();
+                            return new Token(Token.TokenType.GREATER_OR_EQUAL, ">=");
+                        }
+                        return new Token(Token.TokenType.GREATER_THAN, ">");
+
 
                     default:
                         throw new InterpreterException(

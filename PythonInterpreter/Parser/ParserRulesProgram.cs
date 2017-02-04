@@ -71,7 +71,7 @@ namespace PythonInterpreter.ParserNamespace
         {
             Eat(Token.TokenType.OUT);
 
-            return new PrintNode(tokens[index], ArithmeticExpression());
+            return new PrintNode(tokens[index - 1], ArithmeticExpression());
         }
     }
 }

@@ -234,4 +234,55 @@ namespace PythonInterpreter.SyntaxTrees
 
         }
     }
+
+
+    //////////////////
+
+    class LessThanNode : BinaryOperationNode
+    {
+        public LessThanNode(Token token, Node left, Node right) : base(token, left, right)
+        {
+
+        }
+    }
+
+    class GreaterThanNode : BinaryOperationNode
+    {
+        public GreaterThanNode(Token token, Node left, Node right) : base(token, left, right)
+        {
+
+        }
+    }
+
+    class LessThanOrEqualNode : BinaryOperationNode
+    {
+        public LessThanOrEqualNode(Token token, Node left, Node right) : base(token, left, right)
+        {
+
+        }
+    }
+
+    class GreaterThanOrEqualNode : BinaryOperationNode
+    {
+        public GreaterThanOrEqualNode(Token token, Node left, Node right) : base(token, left, right)
+        {
+
+        }
+    }
+
+    class EqualNode : BinaryOperationNode
+    {
+        public EqualNode(Token token, Node left, Node right) : base(token, left, right)
+        {
+
+        }
+    }
+
+    class NotEqualNode : BinaryOperationNode
+    {
+        public NotEqualNode(Token token, Node left, Node right) : base(token, left, right)
+        {
+
+        }
+    }
 }

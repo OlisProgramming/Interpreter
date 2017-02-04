@@ -19,6 +19,12 @@ SEMICOLON:	";"
 TMP_OUT:	":"  // Temporary print statement
 CAST:		"->"
 IF:			"if"
+LESS:		"<"
+GREATER:	">"
+LESS_EQ:	"<="
+GREATER_EQ:	">="
+EQUAL:		"=="
+NOT_EQUAL:	"!="
 NUMBER:		(DIGIT+) ['.' DIGIT*]
 
 IDENTIFIER:	LETTER (LETTER | DIGIT)*
@@ -31,7 +37,7 @@ Number:		((MINUS | PLUS) Number) | (NUMBER)
 ArithmeticUnit:					(Number | IDENTIFIER | (LPARENTH ArithmeticExpression RPARENTH)) (CAST IDENTIFIER)*
 ArithmeticComponentMulDiv:		ArithmeticUnit				((MUL | DIV)	ArithmeticUnit)*
 ArithmeticComponentAddSub:		ArithmeticComponentMulDiv	((PLUS | MINUS)	ArithmeticComponentMulDiv)*
-ArithmeticExpression:			ArithmeticComponentAddSub
+ArithmeticExpression:			ArithmeticComponentAddSub [LESS | GREATER | LESS_EQ | GREATER_EQ | EQUAL | NOT_EQUAL ArithmeticExpression]
 
 AssignmentExpression:			IDENTIFIER ASSIGN ArithmeticExpression
 

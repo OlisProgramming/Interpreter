@@ -44,7 +44,7 @@ namespace PythonInterpreter.Variables
             Variable result;
             try
             {
-                result = AddImpl(other);
+                result = SubImpl(other);
             }
             catch (NotImplementedException)
             {
@@ -67,7 +67,7 @@ namespace PythonInterpreter.Variables
             Variable result;
             try
             {
-                result = AddImpl(other);
+                result = MulImpl(other);
             }
             catch (NotImplementedException)
             {
@@ -90,7 +90,7 @@ namespace PythonInterpreter.Variables
             Variable result;
             try
             {
-                result = AddImpl(other);
+                result = DivImpl(other);
             }
             catch (NotImplementedException)
             {
@@ -107,6 +107,158 @@ namespace PythonInterpreter.Variables
             return self.Div(other);
         }
         public abstract Variable DivImpl(Variable other);
+
+        public Variable UnaryPlus(Variable other)
+        {
+            Variable result;
+            try
+            {
+                result = UnaryPlusImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "UnaryPlus", TypeName);
+            }
+
+            return result;
+        }
+        public abstract Variable UnaryPlusImpl(Variable other);
+
+        public Variable UnaryMinus(Variable other)
+        {
+            Variable result;
+            try
+            {
+                result = UnaryMinusImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "UnaryMinus", TypeName);
+            }
+
+            return result;
+        }
+        public abstract Variable UnaryMinusImpl(Variable other);
+
+        public Variable LessThan(Variable other)
+        {
+            Variable result;
+            try
+            {
+                result = LessThanImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "LessThan", TypeName);
+            }
+
+            return result;
+        }
+        public abstract Variable LessThanImpl(Variable other);
+
+        public Variable GreaterThan(Variable other)
+        {
+            Variable result;
+            try
+            {
+                result = GreaterThanImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "GreaterThan", TypeName);
+            }
+
+            return result;
+        }
+        public abstract Variable GreaterThanImpl(Variable other);
+
+        public Variable LessThanOrEqual(Variable other)
+        {
+            Variable result;
+            try
+            {
+                result = LessThanOrEqualImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "LessThanOrEqual", TypeName);
+            }
+
+            return result;
+        }
+        public abstract Variable LessThanOrEqualImpl(Variable other);
+
+        public Variable GreaterThanOrEqual(Variable other)
+        {
+            Variable result;
+            try
+            {
+                result = GreaterThanOrEqualImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "GreaterThanOrEqual", TypeName);
+            }
+
+            return result;
+        }
+        public abstract Variable GreaterThanOrEqualImpl(Variable other);
+
+        public Variable Equal(Variable other)
+        {
+            Variable result;
+            try
+            {
+                result = EqualImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "Equal", TypeName);
+            }
+
+            return result;
+        }
+        public abstract Variable EqualImpl(Variable other);
+
+        public Variable NotEqual(Variable other)
+        {
+            Variable result;
+            try
+            {
+                result = NotEqualImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "NotEqual", TypeName);
+            }
+
+            return result;
+        }
+        public abstract Variable NotEqualImpl(Variable other);
 
         ///////////////
 

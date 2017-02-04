@@ -76,6 +76,37 @@ namespace PythonInterpreter.ParserNamespace
         {
             Node result = ArithmeticExpressionAddSub();
 
+            if (tokens[index].Type == Token.TokenType.LESS_THAN)
+            {
+                Eat(Token.TokenType.LESS_THAN);
+                result = new LessThanNode(tokens[index - 1], result, ArithmeticExpression());
+            }
+            else if (tokens[index].Type == Token.TokenType.GREATER_THAN)
+            {
+                Eat(Token.TokenType.GREATER_THAN);
+                result = new GreaterThanNode(tokens[index - 1], result, ArithmeticExpression());
+            }
+            else if (tokens[index].Type == Token.TokenType.LESS_OR_EQUAL)
+            {
+                Eat(Token.TokenType.LESS_OR_EQUAL);
+                result = new LessThanOrEqualNode(tokens[index - 1], result, ArithmeticExpression());
+            }
+            else if (tokens[index].Type == Token.TokenType.GREATER_OR_EQUAL)
+            {
+                Eat(Token.TokenType.GREATER_OR_EQUAL);
+                result = new GreaterThanOrEqualNode(tokens[index - 1], result, ArithmeticExpression());
+            }
+            else if (tokens[index].Type == Token.TokenType.EQUAL)
+            {
+                Eat(Token.TokenType.EQUAL);
+                result = new EqualNode(tokens[index - 1], result, ArithmeticExpression());
+            }
+            else if (tokens[index].Type == Token.TokenType.NOT_EQUAL)
+            {
+                Eat(Token.TokenType.NOT_EQUAL);
+                result = new NotEqualNode(tokens[index - 1], result, ArithmeticExpression());
+            }
+
             return result;
         }
 

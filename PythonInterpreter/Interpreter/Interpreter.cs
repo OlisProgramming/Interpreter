@@ -38,6 +38,19 @@ namespace PythonInterpreter.InterpreterNamespace
             if (node is UnaryMinusNode)
                 return VisitUnaryMinusNode(node as UnaryMinusNode);
 
+            if (node is LessThanNode)
+                return VisitLessThanNode(node as LessThanNode);
+            if (node is GreaterThanNode)
+                return VisitGreaterThanNode(node as GreaterThanNode);
+            if (node is LessThanOrEqualNode)
+                return VisitLessThanOrEqualNode(node as LessThanOrEqualNode);
+            if (node is GreaterThanOrEqualNode)
+                return VisitGreaterThanOrEqualNode(node as GreaterThanOrEqualNode);
+            if (node is EqualNode)
+                return VisitEqualNode(node as EqualNode);
+            if (node is NotEqualNode)
+                return VisitNotEqualNode(node as NotEqualNode);
+
             if (node is AssignNode)
                 return VisitAssignNode(node as AssignNode);
             if (node is PrintNode)
@@ -135,6 +148,36 @@ namespace PythonInterpreter.InterpreterNamespace
             else
                 Visit(node.Right);
             return condition;
+        }
+
+        private Variable VisitLessThanNode(LessThanNode node)
+        {
+            return Visit(node.Left).LessThan(Visit(node.Right));
+        }
+
+        private Variable VisitGreaterThanNode(GreaterThanNode node)
+        {
+            return Visit(node.Left).GreaterThan(Visit(node.Right));
+        }
+
+        private Variable VisitLessThanOrEqualNode(LessThanOrEqualNode node)
+        {
+            return Visit(node.Left).LessThanOrEqual(Visit(node.Right));
+        }
+
+        private Variable VisitGreaterThanOrEqualNode(GreaterThanOrEqualNode node)
+        {
+            return Visit(node.Left).GreaterThanOrEqual(Visit(node.Right));
+        }
+
+        private Variable VisitEqualNode(EqualNode node)
+        {
+            return Visit(node.Left).Equal(Visit(node.Right));
+        }
+
+        private Variable VisitNotEqualNode(NotEqualNode node)
+        {
+            return Visit(node.Left).NotEqual(Visit(node.Right));
         }
     }
 }

@@ -16,9 +16,7 @@ namespace PythonInterpreter.ParserNamespace
 
             Eat(Token.TokenType.ASSIGN);
 
-            Node arith = ArithmeticExpression();
-
-            return new AssignNode(tokens[index], node, arith);
+            return new AssignNode(tokens[index - 1], node, ArithmeticExpression());
         }
 
         public Node Identifier()
