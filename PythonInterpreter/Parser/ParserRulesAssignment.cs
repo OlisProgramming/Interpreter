@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PythonInterpreter.SyntaxTrees;
+using PythonInterpreter.TokeniserNamespace;
 
-namespace PythonInterpreter
+namespace PythonInterpreter.ParserNamespace
 {
     partial class Parser
     {

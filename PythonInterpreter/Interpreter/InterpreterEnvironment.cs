@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PythonInterpreter.Variables;
 
-namespace PythonInterpreter
+namespace PythonInterpreter.InterpreterNamespace
 {
     class InterpreterEnvironment
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PythonInterpreter
+namespace PythonInterpreter.TokeniserNamespace
 {
     partial class Tokeniser
     {
