@@ -24,7 +24,10 @@ namespace PythonInterpreter.ParserNamespace
             if (tokens[index].Type == Token.TokenType.ELSE)
             {
                 Eat(Token.TokenType.ELSE);
-                alternative = StatementBlock();
+                if (tokens[index].Type == Token.TokenType.IF)
+                    alternative = IfStatement();
+                else
+                    alternative = StatementBlock();
             }
             else
             {

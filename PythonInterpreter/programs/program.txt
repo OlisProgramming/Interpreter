@@ -1,6 +1,10 @@
 {
-	if true  {
+	if false  {
 		:true;
+
+	} else if 0 {
+		:0;
+
 	} else {
 		:false;
 	}
