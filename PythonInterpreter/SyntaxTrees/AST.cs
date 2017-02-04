@@ -134,7 +134,7 @@ namespace PythonInterpreter.SyntaxTrees
 
         public NumberNode(Token token) : base(token)
         {
-            Value = new VariableDouble(Convert.ToDouble(token.Value));
+            Value = new VariableNumber(Convert.ToDouble(token.Value));
         }
 
         public override string ToString()

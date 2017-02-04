@@ -21,6 +21,7 @@ namespace PythonInterpreter
 
             INTERPRETER_NO_VISIT_METHOD,
             INTERPRETER_INVALID_OPERATION,
+            INTERPRETER_CANNOT_SET_READONLY_VARIABLE,
         }
 
         public InterpreterExceptionType Error { get; set; }
@@ -62,6 +63,10 @@ namespace PythonInterpreter
 
                 case InterpreterExceptionType.INTERPRETER_INVALID_OPERATION:
                     msg += $"Cannot perform operation {Details[0]} on type {Details[1]}.";
+                    break;
+
+                case InterpreterExceptionType.INTERPRETER_CANNOT_SET_READONLY_VARIABLE:
+                    msg += $"Cannot set the value of the readonly variable {Details[0]}.";
                     break;
 
                 default:

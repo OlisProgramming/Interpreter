@@ -90,7 +90,8 @@ namespace PythonInterpreter.TokeniserNamespace
                 }
                 else if (char.IsLetter(CurrentChar))
                 {
-                    return new Token(Token.TokenType.IDENTIFIER, GetNextIdentifierValue());
+                    string id = GetNextIdentifierValue();
+                    return new Token(Token.TokenType.IDENTIFIER, id);
                 }
                 switch (CurrentChar)
                 {

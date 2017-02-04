@@ -91,7 +91,7 @@ namespace PythonInterpreter.InterpreterNamespace
 
         private Variable VisitUnaryMinusNode(UnaryMinusNode node)
         {
-            return Visit(node.Child) * new VariableDouble(-1.0);  // TODO unary minus
+            return Visit(node.Child) * new VariableNumber(-1.0);  // TODO unary minus
         }
 
         private Variable VisitAssignNode(AssignNode node)

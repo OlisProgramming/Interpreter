@@ -1,1 +1,5 @@
-: 1.0 -> boolean;
+: 1 -> boolean;
+: true -> number;
+
+: 1 -> number;
+: true -> boolean;

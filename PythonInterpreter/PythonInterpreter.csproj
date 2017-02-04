@@ -57,7 +57,7 @@
     <Compile Include="Tokeniser\Token.cs" />
     <Compile Include="Variables\Variable.cs" />
     <Compile Include="Variables\VariableBoolean.cs" />
-    <Compile Include="Variables\VariableDouble.cs" />
+    <Compile Include="Variables\VariableNumber.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

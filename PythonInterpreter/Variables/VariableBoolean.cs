@@ -51,6 +51,9 @@ namespace PythonInterpreter.Variables
 
         public override Variable CastImpl(string typeToCast)
         {
+            if (typeToCast == "number")
+                return new VariableNumber(Value ? 1 : 0);
+
             throw new InterpreterException(
                 InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
                 new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
@@ -59,7 +62,7 @@ namespace PythonInterpreter.Variables
 
         public override string ToString()
         {
-            return Value? "true" : "false";
+            return Value ? "true" : "false";
         }
     }
 }

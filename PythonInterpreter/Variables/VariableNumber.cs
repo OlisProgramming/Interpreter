@@ -6,55 +6,55 @@ using System.Threading.Tasks;
 
 namespace PythonInterpreter.Variables
 {
-    class VariableDouble : Variable
+    class VariableNumber : Variable
     {
         internal double Value { get; set; }
 
-        public VariableDouble() : this(0.0) { }
+        public VariableNumber() : this(0.0) { }
 
-        public VariableDouble(double value) : base("double")
+        public VariableNumber(double value) : base("number")
         {
             Value = value;
         }
 
         public override Variable AddImpl(Variable other)
         {
-            VariableDouble otherDouble = other as VariableDouble;
+            VariableNumber otherDouble = other as VariableNumber;
             if (otherDouble == null)
             {
                 //throw new InterpreterException()
             }
-            return new VariableDouble(Value + otherDouble.Value);
+            return new VariableNumber(Value + otherDouble.Value);
         }
 
         public override Variable SubImpl(Variable other)
         {
-            VariableDouble otherDouble = other as VariableDouble;
+            VariableNumber otherDouble = other as VariableNumber;
             if (otherDouble == null)
             {
                 //throw new InterpreterException()
             }
-            return new VariableDouble(Value - otherDouble.Value);
+            return new VariableNumber(Value - otherDouble.Value);
         }
 
         public override Variable MulImpl(Variable other)
         {
-            VariableDouble otherDouble = other as VariableDouble;
+            VariableNumber otherDouble = other as VariableNumber;
             if (otherDouble == null)
             {
                 //throw new InterpreterException()
             }
-            return new VariableDouble(Value * otherDouble.Value);
+            return new VariableNumber(Value * otherDouble.Value);
         }
 
         public override Variable DivImpl(Variable other)
         {
-            VariableDouble otherDouble = other as VariableDouble;
+            VariableNumber otherDouble = other as VariableNumber;
             if (otherDouble == null)
             {
                 //throw new InterpreterException()
             }
-            return new VariableDouble(Value / otherDouble.Value);
+            return new VariableNumber(Value / otherDouble.Value);
         }
 
         public override Variable CastImpl(string typeToCast)
