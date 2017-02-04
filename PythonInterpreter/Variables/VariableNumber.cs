@@ -19,41 +19,25 @@ namespace PythonInterpreter.Variables
 
         public override Variable AddImpl(Variable other)
         {
-            VariableNumber otherDouble = other as VariableNumber;
-            if (otherDouble == null)
-            {
-                //throw new InterpreterException()
-            }
+            VariableNumber otherDouble = other.Cast("number") as VariableNumber;
             return new VariableNumber(Value + otherDouble.Value);
         }
 
         public override Variable SubImpl(Variable other)
         {
-            VariableNumber otherDouble = other as VariableNumber;
-            if (otherDouble == null)
-            {
-                //throw new InterpreterException()
-            }
+            VariableNumber otherDouble = other.Cast("number") as VariableNumber;
             return new VariableNumber(Value - otherDouble.Value);
         }
 
         public override Variable MulImpl(Variable other)
         {
-            VariableNumber otherDouble = other as VariableNumber;
-            if (otherDouble == null)
-            {
-                //throw new InterpreterException()
-            }
+            VariableNumber otherDouble = other.Cast("number") as VariableNumber;
             return new VariableNumber(Value * otherDouble.Value);
         }
 
         public override Variable DivImpl(Variable other)
         {
-            VariableNumber otherDouble = other as VariableNumber;
-            if (otherDouble == null)
-            {
-                //throw new InterpreterException()
-            }
+            VariableNumber otherDouble = other.Cast("number") as VariableNumber;
             return new VariableNumber(Value / otherDouble.Value);
         }
 
