@@ -40,7 +40,7 @@ namespace PythonInterpreter
             IEnumerable<string> lines = System.IO.File.ReadLines(TokenAt.FileName);
             string line = lines.Skip(TokenAt.Line - 1).Take(1).First();
 
-            string msg = $"\n\n-----\n\nError caught at line {TokenAt.Line}, column {TokenAt.Column}! "
+            string msg = $"\n\n-----\n\nError caught at line {TokenAt.Line}, column {TokenAt.Column} of file {TokenAt.FileName}! "
              + $"Erroneous line is:\n\t{line}\n"
              + $"Error code {((int)Error).ToString("D3")} ({Error}):\n";
 
