@@ -26,11 +26,19 @@ namespace PythonInterpreter.TokeniserNamespace
 
         public TokenType Type { get; set; }
         public string Value { get; set; }
+        public int Line { get; set; }
+        public int Column { get; set; }
+        public string FileName { get; set; }
 
-        public Token(TokenType type, string value)
+        public Token(TokenType type, string value) : this(type, value, 0, 0, "") { }
+
+        public Token(TokenType type, string value, int line, int column, string fileName)
         {
             Type = type;
             Value = value;
+            Line = line;
+            Column = column;
+            FileName = fileName;
         }
 
         public override string ToString()
