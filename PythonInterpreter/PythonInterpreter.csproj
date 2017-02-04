@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parser\ParserRulesCondition.cs" />
     <Compile Include="SyntaxTrees\AST.cs" />
     <Compile Include="InterpreterException.cs" />
     <Compile Include="Interpreter\Interpreter.cs" />

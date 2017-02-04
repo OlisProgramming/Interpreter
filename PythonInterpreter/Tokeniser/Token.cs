@@ -13,8 +13,10 @@ namespace PythonInterpreter.TokeniserNamespace
             NUMBER,
             ADD, SUB, MUL, DIV,
             LPARENTH, RPARENTH,
+            LBRACE, RBRACE,
             ASSIGN, SEMICOLON, CAST,
             OUT,
+            IF,
             IDENTIFIER,
             EOF
         }

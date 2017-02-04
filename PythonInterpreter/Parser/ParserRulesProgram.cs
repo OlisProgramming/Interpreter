@@ -12,14 +12,27 @@ namespace PythonInterpreter.ParserNamespace
     {
         public Node Program()
         {
-            ProgramNode program = new ProgramNode(tokens[index]);
+            return StatementBlock();
+        }
+
+        public Node StatementBlock()
+        {
+            Eat(Token.TokenType.LBRACE);
+
+            StatementListNode node = new StatementListNode(tokens[index]);
 
             while (index < tokens.Count - 1)
             {
-                program.AddStatement(Statement());
+                Node statement = Statement();
+                node.AddStatement(statement);
+                if (tokens[index].Type == Token.TokenType.RBRACE)
+                {
+                    break;
+                }
             }
 
-            return program;
+            Eat(Token.TokenType.RBRACE);
+            return node;
         }
 
         public Node Statement()
@@ -31,17 +44,25 @@ namespace PythonInterpreter.ParserNamespace
             if (tk.Type == Token.TokenType.OUT)
             {
                 node = PrintStatement();
+                Eat(Token.TokenType.SEMICOLON);
             }
             else if (tk.Type == Token.TokenType.IDENTIFIER)
             {
                 node = AssignmentExpression();
+                Eat(Token.TokenType.SEMICOLON);
+            }
+            else if (tk.Type == Token.TokenType.IF)
+            {
+                node = IfStatement();
             }
             else
             {
-                node = ArithmeticExpression();
-            }
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.PARSER_EXPECTED_DIFFERENT_TOKEN,
+                    new Token(Token.TokenType.EOF, ""),
+                    "IF or OUT or IDENTIFIER", tk.Type.ToString());
 
-            Eat(Token.TokenType.SEMICOLON);
+            }
 
             return node;
         }

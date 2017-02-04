@@ -91,7 +91,10 @@ namespace PythonInterpreter.TokeniserNamespace
                 else if (char.IsLetter(CurrentChar))
                 {
                     string id = GetNextIdentifierValue();
-                    return new Token(Token.TokenType.IDENTIFIER, id);
+                    if (id == "if")
+                        return new Token(Token.TokenType.IF, "if");
+                    else
+                        return new Token(Token.TokenType.IDENTIFIER, id);
                 }
                 switch (CurrentChar)
                 {
@@ -123,6 +126,14 @@ namespace PythonInterpreter.TokeniserNamespace
                     case ')':
                         Advance();
                         return new Token(Token.TokenType.RPARENTH, ")");
+
+                    case '{':
+                        Advance();
+                        return new Token(Token.TokenType.LBRACE, "{");
+
+                    case '}':
+                        Advance();
+                        return new Token(Token.TokenType.RBRACE, "}");
 
                     case '=':
                         Advance();

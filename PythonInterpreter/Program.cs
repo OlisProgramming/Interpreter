@@ -32,11 +32,11 @@ namespace PythonInterpreter
                 Console.WriteLine("ABSTRACT SYNTAX TREE:");
                 Console.WriteLine(expr);
 
+                Console.WriteLine("INITIALISING INTERPRETER AND RUNNING PROGRAM...");
+                Console.WriteLine("-----------------------------------------------\n\n\n");
+
                 Interpreter interpreter = new Interpreter();
                 Variable result = interpreter.Visit(expr);
-
-                Console.WriteLine("VALUE OF TREE:");
-                Console.WriteLine(result);
             }
             catch (InterpreterException ex)
             {

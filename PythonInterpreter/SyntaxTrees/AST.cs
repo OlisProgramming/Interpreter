@@ -160,12 +160,12 @@ namespace PythonInterpreter.SyntaxTrees
 
     //////////////
 
-    class ProgramNode : Node
+    class StatementListNode : Node
     {
         private List<Node> statements;
         public List<Node> Statements { get { return statements; } }
 
-        public ProgramNode(Token token) : base(token)
+        public StatementListNode(Token token) : base(token)
         {
             statements = new List<Node>();
         }
@@ -203,6 +203,16 @@ namespace PythonInterpreter.SyntaxTrees
         public CastNode(Token token, Node child, string id) : base(token, child)
         {
             TypeToCast = id;
+        }
+    }
+
+    //////////////////
+
+    class IfNode : BinaryOperationNode
+    {
+        public IfNode(Token token, Node condition, Node statement) : base(token, condition, statement)
+        {
+
         }
     }
 }

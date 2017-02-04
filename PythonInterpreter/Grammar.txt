@@ -12,10 +12,13 @@ MUL:		"*"
 DIV:		"/"
 LPARENTH:	"("
 RPARENTH:	")"
+LBRACE:		"{"
+RBRACE:		"}"
 ASSIGN:		"="
 SEMICOLON:	";"
 TMP_OUT:	":"  // Temporary print statement
 CAST:		"->"
+IF:			"if"
 NUMBER:		(DIGIT+) ['.' DIGIT*]
 
 IDENTIFIER:	LETTER (LETTER | DIGIT)*
@@ -32,6 +35,10 @@ ArithmeticExpression:			ArithmeticComponentAddSub
 
 AssignmentExpression:			IDENTIFIER ASSIGN ArithmeticExpression
 
-Statement:						(AssignmentExpression | ArithmeticExpression) SEMICOLON
+PrintExpression:				OUT ArithmeticExpression
+ConditionalExpression:			IF ArithmeticExpression Statement
 
-Program:						Statement+
+Statement:						(AssignmentExpression | PrintExpression | ConditionalExpression) SEMICOLON
+StatementBlock:					LBRACE Statement+ RBRACE
+
+Program:						StatementBlock

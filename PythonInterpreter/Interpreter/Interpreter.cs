@@ -45,8 +45,11 @@ namespace PythonInterpreter.InterpreterNamespace
             if (node is CastNode)
                 return VisitCastNode(node as CastNode);
 
-            if (node is ProgramNode)
-                return VisitProgramNode(node as ProgramNode);
+            if (node is IfNode)
+                return VisitIfNode(node as IfNode);
+
+            if (node is StatementListNode)
+                return VisitProgramNode(node as StatementListNode);
 
             throw new InterpreterException(
                 InterpreterException.InterpreterExceptionType.INTERPRETER_NO_VISIT_METHOD,
@@ -108,7 +111,7 @@ namespace PythonInterpreter.InterpreterNamespace
             return v;
         }
 
-        private Variable VisitProgramNode(ProgramNode node)
+        private Variable VisitProgramNode(StatementListNode node)
         {
             foreach (Node statement in node.Statements)
             {
@@ -122,6 +125,13 @@ namespace PythonInterpreter.InterpreterNamespace
         {
             Variable val = Visit(node.Child);
             return val.Cast(node.TypeToCast);
+        }
+
+        private Variable VisitIfNode(IfNode node)
+        {
+            VariableBoolean condition = (Visit(node.Left).Cast("boolean")) as VariableBoolean;
+            if (condition.Value) Visit(node.Right);
+            return condition;
         }
     }
 }

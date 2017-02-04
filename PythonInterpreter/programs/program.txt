@@ -1,5 +1,9 @@
-: 1 -> boolean;
-: true -> number;
+{
+	if true  {
+		:true;
+	}
 
-: 1 -> number;
-: true -> boolean;
+	if false {
+		:false;
+	}	
+}
