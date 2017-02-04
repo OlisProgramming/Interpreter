@@ -1,9 +1,7 @@
 {
 	if true  {
 		:true;
-	}
-
-	if false {
+	} else {
 		:false;
 	}
 }

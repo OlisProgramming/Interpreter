@@ -130,7 +130,10 @@ namespace PythonInterpreter.InterpreterNamespace
         private Variable VisitIfNode(IfNode node)
         {
             VariableBoolean condition = (Visit(node.Left).Cast("boolean")) as VariableBoolean;
-            if (condition.Value) Visit(node.Right);
+            if (condition.Value)
+                Visit(node.Mid);
+            else
+                Visit(node.Right);
             return condition;
         }
     }

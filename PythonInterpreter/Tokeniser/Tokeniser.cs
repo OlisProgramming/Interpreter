@@ -93,6 +93,8 @@ namespace PythonInterpreter.TokeniserNamespace
                     string id = GetNextIdentifierValue();
                     if (id == "if")
                         return new Token(Token.TokenType.IF, "if");
+                    else if (id == "else")
+                        return new Token(Token.TokenType.ELSE, "else");
                     else
                         return new Token(Token.TokenType.IDENTIFIER, id);
                 }

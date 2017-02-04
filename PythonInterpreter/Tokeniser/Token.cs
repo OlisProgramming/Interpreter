@@ -16,7 +16,7 @@ namespace PythonInterpreter.TokeniserNamespace
             LBRACE, RBRACE,
             ASSIGN, SEMICOLON, CAST,
             OUT,
-            IF,
+            IF, ELSE,
             IDENTIFIER,
             EOF
         }

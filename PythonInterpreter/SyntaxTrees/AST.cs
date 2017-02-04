@@ -208,9 +208,28 @@ namespace PythonInterpreter.SyntaxTrees
 
     //////////////////
 
-    class IfNode : BinaryOperationNode
+    class TernaryOperationNode : Node
     {
-        public IfNode(Token token, Node condition, Node statement) : base(token, condition, statement)
+        public Node Left { get; set; }
+        public Node Mid { get; set; }
+        public Node Right { get; set; }
+
+        public TernaryOperationNode(Token token, Node left, Node mid, Node right) : base(token)
+        {
+            Left = left;
+            Mid = mid;
+            Right = right;
+        }
+
+        public override string ToString()
+        {
+            return Token.Value + "{" + Left.ToString() + ", " + Mid.ToString() + ", " + Right.ToString() + "}";
+        }
+    }
+
+    class IfNode : TernaryOperationNode
+    {
+        public IfNode(Token token, Node condition, Node statement, Node alternative) : base(token, condition, statement, alternative)
         {
 
         }

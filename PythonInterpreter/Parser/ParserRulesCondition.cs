@@ -19,7 +19,19 @@ namespace PythonInterpreter.ParserNamespace
 
             Node statement = StatementBlock();
 
-            return new IfNode(tk, arith, statement);
+            Node alternative;
+
+            if (tokens[index].Type == Token.TokenType.ELSE)
+            {
+                Eat(Token.TokenType.ELSE);
+                alternative = StatementBlock();
+            }
+            else
+            {
+                alternative = new StatementListNode(tk);
+            }
+
+            return new IfNode(tk, arith, statement, alternative);
         }
     }
 }
