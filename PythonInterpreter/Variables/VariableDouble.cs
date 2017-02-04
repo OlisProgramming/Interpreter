@@ -59,7 +59,12 @@ namespace PythonInterpreter.Variables
 
         public override Variable CastImpl(string typeToCast)
         {
-            throw new NotImplementedException();
+            if (typeToCast == "boolean") return new VariableBoolean(Value != 0);
+
+            throw new InterpreterException(
+                InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                $"Cast({typeToCast})", TypeName);
         }
 
         public override string ToString()

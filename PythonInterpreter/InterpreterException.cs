@@ -20,6 +20,7 @@ namespace PythonInterpreter
             PARSER_EXPECTED_DIFFERENT_TOKEN,
 
             INTERPRETER_NO_VISIT_METHOD,
+            INTERPRETER_INVALID_OPERATION,
         }
 
         public InterpreterExceptionType Error { get; set; }
@@ -57,6 +58,10 @@ namespace PythonInterpreter
 
                 case InterpreterExceptionType.INTERPRETER_NO_VISIT_METHOD:
                     msg += $"Error while visiting node {Details[0]} of type {Details[1]}. There was no Visit method for this node.";
+                    break;
+
+                case InterpreterExceptionType.INTERPRETER_INVALID_OPERATION:
+                    msg += $"Cannot perform operation {Details[0]} on type {Details[1]}.";
                     break;
 
                 default:

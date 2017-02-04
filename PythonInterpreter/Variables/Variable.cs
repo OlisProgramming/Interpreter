@@ -9,7 +9,7 @@ namespace PythonInterpreter.Variables
     abstract class Variable
     {
         private string typeName;
-        public string TypeName { get; }
+        public string TypeName { get { return typeName; } }
 
         public Variable(string typeName)
         {

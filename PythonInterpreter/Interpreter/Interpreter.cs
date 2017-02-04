@@ -121,7 +121,7 @@ namespace PythonInterpreter.InterpreterNamespace
         private Variable VisitCastNode(CastNode node)
         {
             Variable val = Visit(node.Child);
-            return val;
+            return val.Cast(node.TypeToCast);
         }
     }
 }

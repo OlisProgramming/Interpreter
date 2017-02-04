@@ -56,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokeniser\Token.cs" />
     <Compile Include="Variables\Variable.cs" />
+    <Compile Include="Variables\VariableBoolean.cs" />
     <Compile Include="Variables\VariableDouble.cs" />
   </ItemGroup>
   <ItemGroup>
