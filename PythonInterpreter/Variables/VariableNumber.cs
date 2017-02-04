@@ -61,10 +61,7 @@ namespace PythonInterpreter.Variables
         {
             if (typeToCast == "boolean") return new VariableBoolean(Value != 0);
 
-            throw new InterpreterException(
-                InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
-                $"Cast({typeToCast})", TypeName);
+            throw new NotImplementedException();
         }
 
         public override string ToString()

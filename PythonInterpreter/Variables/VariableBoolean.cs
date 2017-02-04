@@ -19,34 +19,22 @@ namespace PythonInterpreter.Variables
 
         public override Variable AddImpl(Variable other)
         {
-            throw new InterpreterException(
-                InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
-                "Add", TypeName);
+            throw new NotImplementedException();
         }
 
         public override Variable SubImpl(Variable other)
         {
-            throw new InterpreterException(
-                InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
-                "Sub", TypeName);
+            throw new NotImplementedException();
         }
 
         public override Variable MulImpl(Variable other)
         {
-            throw new InterpreterException(
-                InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
-                "Mul", TypeName);
+            throw new NotImplementedException();
         }
 
         public override Variable DivImpl(Variable other)
         {
-            throw new InterpreterException(
-                InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
-                "Div", TypeName);
+            throw new NotImplementedException();
         }
 
         public override Variable CastImpl(string typeToCast)
@@ -54,10 +42,7 @@ namespace PythonInterpreter.Variables
             if (typeToCast == "number")
                 return new VariableNumber(Value ? 1 : 0);
 
-            throw new InterpreterException(
-                InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
-                "Cast", TypeName);
+            throw new NotImplementedException();
         }
 
         public override string ToString()

@@ -18,8 +18,18 @@ namespace PythonInterpreter.Variables
 
         public Variable Add(Variable other)
         {
-            Variable this_result = AddImpl(other);  // Should return null if code path is unavailable.
-            Variable result = this_result ?? other.AddImpl(this);
+            Variable result;
+            try
+            {
+                result = AddImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "Add", TypeName);
+            }
 
             return result;
         }
@@ -31,8 +41,18 @@ namespace PythonInterpreter.Variables
 
         public Variable Sub(Variable other)
         {
-            Variable this_result = SubImpl(other);
-            Variable result = this_result ?? other.SubImpl(this);
+            Variable result;
+            try
+            {
+                result = AddImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "Sub", TypeName);
+            }
 
             return result;
         }
@@ -44,8 +64,18 @@ namespace PythonInterpreter.Variables
 
         public Variable Mul(Variable other)
         {
-            Variable this_result = MulImpl(other);
-            Variable result = this_result ?? other.MulImpl(this);
+            Variable result;
+            try
+            {
+                result = AddImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "Mul", TypeName);
+            }
 
             return result;
         }
@@ -57,8 +87,18 @@ namespace PythonInterpreter.Variables
 
         public Variable Div(Variable other)
         {
-            Variable this_result = DivImpl(other);
-            Variable result = this_result ?? other.DivImpl(this);
+            Variable result;
+            try
+            {
+                result = AddImpl(other);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    "Div", TypeName);
+            }
 
             return result;
         }
@@ -72,9 +112,19 @@ namespace PythonInterpreter.Variables
 
         public Variable Cast(string typeToCast)
         {
-            if (typeName != typeToCast)
-                return CastImpl(typeToCast);
-            return this;
+            try
+            {
+                if (typeName != typeToCast)
+                    return CastImpl(typeToCast);
+                return this;
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    $"Cast({typeToCast})", TypeName);
+            }
         }
         public abstract Variable CastImpl(string typeToCast);
     }
