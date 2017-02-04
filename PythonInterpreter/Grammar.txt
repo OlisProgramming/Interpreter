@@ -14,16 +14,17 @@ LPARENTH:	"("
 RPARENTH:	")"
 ASSIGN:		"="
 SEMICOLON:	";"
-INTEGER:	DIGIT+
+TMP_OUT:	":"  // Temporary print statement
+NUMBER:		(DIGIT+) ['.' DIGIT*]
 
 IDENTIFIER:	LETTER (LETTER | DIGIT)*
 
 
 // NON-TERMINALS
 
-Number:		((MINUS | PLUS) Number) | (INTEGER)
+Number:		((MINUS | PLUS) Number) | (NUMBER)
 
-ArithmeticUnit:					Number | (LPARENTH ArithmeticExpression RPARENTH)
+ArithmeticUnit:					Number | IDENTIFIER | (LPARENTH ArithmeticExpression RPARENTH)
 ArithmeticComponentMulDiv:		ArithmeticUnit				((MUL | DIV)	ArithmeticUnit)*
 ArithmeticComponentAddSub:		ArithmeticComponentMulDiv	((PLUS | MINUS)	ArithmeticComponentMulDiv)*
 ArithmeticExpression:			ArithmeticComponentAddSub

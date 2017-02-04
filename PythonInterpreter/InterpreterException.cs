@@ -14,6 +14,7 @@ namespace PythonInterpreter
 
             TOKENISER_FILE_EMPTY,
             TOKENISER_UNRECOGNISED_TOKEN,
+            TOKENISER_TOO_MANY_DECIMAL_POINTS,
 
             PARSER_EXPECTED_DIFFERENT_TOKEN,
 
@@ -43,6 +44,10 @@ namespace PythonInterpreter
 
                 case InterpreterExceptionType.TOKENISER_UNRECOGNISED_TOKEN:
                     msg += $"The token '{TokenAt.Value}' was unrecognised.";
+                    break;
+
+                case InterpreterExceptionType.TOKENISER_TOO_MANY_DECIMAL_POINTS:
+                    msg += "Only one decimal point is permitted in a numeric literal.";
                     break;
 
                 case InterpreterExceptionType.PARSER_EXPECTED_DIFFERENT_TOKEN:

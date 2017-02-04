@@ -26,7 +26,11 @@ namespace PythonInterpreter
 
             Node node;
 
-            if (tk.Type == Token.TokenType.IDENTIFIER)
+            if (tk.Type == Token.TokenType.OUT)
+            {
+                node = PrintStatement();
+            }
+            else if (tk.Type == Token.TokenType.IDENTIFIER)
             {
                 node = AssignmentExpression();
             }
@@ -38,6 +42,13 @@ namespace PythonInterpreter
             Eat(Token.TokenType.SEMICOLON);
 
             return node;
+        }
+
+        public Node PrintStatement()
+        {
+            Eat(Token.TokenType.OUT);
+
+            return new PrintNode(tokens[index], ArithmeticExpression());
         }
     }
 }

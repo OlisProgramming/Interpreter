@@ -28,6 +28,8 @@ namespace PythonInterpreter
 
             if (node is NumberNode)
                 return VisitNumberNode(node as NumberNode);
+            if (node is IdentifierNode)
+                return VisitIdentifierNode(node as IdentifierNode);
 
             if (node is UnaryPlusNode)
                 return VisitUnaryPlusNode(node as UnaryPlusNode);
@@ -36,6 +38,8 @@ namespace PythonInterpreter
 
             if (node is AssignNode)
                 return VisitAssignNode(node as AssignNode);
+            if (node is PrintNode)
+                return VisitPrintNode(node as PrintNode);
 
             if (node is ProgramNode)
                 return VisitProgramNode(node as ProgramNode);
@@ -71,6 +75,11 @@ namespace PythonInterpreter
             return node.Value;
         }
 
+        private Variable VisitIdentifierNode(IdentifierNode node)
+        {
+            return env.GetVariable(node.Value);
+        }
+
         private Variable VisitUnaryPlusNode(UnaryPlusNode node)
         {
             return Visit(node.Child);
@@ -88,13 +97,18 @@ namespace PythonInterpreter
             return v;
         }
 
+        private Variable VisitPrintNode(PrintNode node)
+        {
+            Variable v = Visit(node.Child);
+            Console.WriteLine(v);
+            return v;
+        }
+
         private Variable VisitProgramNode(ProgramNode node)
         {
             foreach (Node statement in node.Statements)
             {
                 Variable val = Visit(statement);
-                Console.Write("Line: ");
-                Console.WriteLine(val);
             }
 
             return null;

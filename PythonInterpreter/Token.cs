@@ -10,10 +10,11 @@ namespace PythonInterpreter
     {
         public enum TokenType
         {
-            INTEGER,
+            NUMBER,
             ADD, SUB, MUL, DIV,
             LPARENTH, RPARENTH,
             ASSIGN, SEMICOLON,
+            OUT,
             IDENTIFIER,
             EOF
         }

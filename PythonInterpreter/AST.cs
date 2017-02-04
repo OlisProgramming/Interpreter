@@ -185,4 +185,12 @@ namespace PythonInterpreter
             return val + "}";
         }
     }
+
+    class PrintNode : UnaryOperationNode
+    {
+        public PrintNode(Token token, Node child) : base(token, child)
+        {
+
+        }
+    }
 }

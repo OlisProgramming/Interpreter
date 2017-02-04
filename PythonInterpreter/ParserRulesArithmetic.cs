@@ -86,6 +86,10 @@ namespace PythonInterpreter
                 node = ArithmeticExpression();
                 Eat(Token.TokenType.RPARENTH);
             }
+            else if (tokens[index].Type == Token.TokenType.IDENTIFIER)
+            {
+                node = Identifier();
+            }
             else
             {
                 node = Number();
@@ -108,7 +112,7 @@ namespace PythonInterpreter
                 return new UnaryMinusNode(tk, Number());
             }
 
-            Eat(Token.TokenType.INTEGER);
+            Eat(Token.TokenType.NUMBER);
 
             NumberNode node = new NumberNode(tk);
 

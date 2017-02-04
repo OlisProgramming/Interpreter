@@ -55,12 +55,21 @@ namespace PythonInterpreter
             return result;
         }
 
-        public string GetNextIntegerValue()
+        public string GetNextNumericValue()
         {
             string result = "";
-            while (CurrentChar != '\0' && char.IsDigit(CurrentChar))
+            bool decimalPointUsed = false;
+            while (CurrentChar != '\0' && (char.IsDigit(CurrentChar) || CurrentChar == '.'))
             {
                 result += CurrentChar;
+                if (CurrentChar == '.')
+                {
+                    if (decimalPointUsed)
+                        throw new InterpreterException(
+                            InterpreterException.InterpreterExceptionType.TOKENISER_TOO_MANY_DECIMAL_POINTS,
+                            new Token(Token.TokenType.EOF, ""));
+                    decimalPointUsed = true;
+                }
                 Advance();
             }
             return result;
@@ -77,7 +86,7 @@ namespace PythonInterpreter
                 }
                 else if (char.IsDigit(CurrentChar))
                 {
-                    return new Token(Token.TokenType.INTEGER, GetNextIntegerValue());
+                    return new Token(Token.TokenType.NUMBER, GetNextNumericValue());
                 }
                 else if (char.IsLetter(CurrentChar))
                 {
@@ -116,6 +125,10 @@ namespace PythonInterpreter
                     case ';':
                         Advance();
                         return new Token(Token.TokenType.SEMICOLON, ";");
+
+                    case ':':
+                        Advance();
+                        return new Token(Token.TokenType.OUT, ":");
 
                     default:
                         throw new InterpreterException(
