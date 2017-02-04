@@ -12,7 +12,7 @@ namespace PythonInterpreter
         {
             try
             {
-                string text = System.IO.File.ReadAllText("program.txt");
+                string text = System.IO.File.ReadAllText("../../programs/program.txt");
 
                 Tokeniser tokeniser = new Tokeniser(text);
                 List<Token> tokens = tokeniser.Tokenise();
