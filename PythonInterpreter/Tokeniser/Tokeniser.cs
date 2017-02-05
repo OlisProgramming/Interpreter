@@ -196,6 +196,9 @@ namespace PythonInterpreter.TokeniserNamespace
                         }
                         return new Token(Token.TokenType.GREATER_THAN, ">", new Frame(Line, Column, FileName, null));
 
+                    case '#':
+                        do Advance(); while (CurrentChar != '\n');
+                        break;
 
                     default:
                         throw new InterpreterException(
