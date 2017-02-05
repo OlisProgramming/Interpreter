@@ -23,7 +23,7 @@ namespace PythonInterpreter.TokeniserNamespace
             if (text.Length == 0)
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.TOKENISER_FILE_EMPTY,
-                    null);
+                    new Frame(1, 1, fileName, null));
             CurrentChar = Text[0];
             Line = 1;
             Column = 0;

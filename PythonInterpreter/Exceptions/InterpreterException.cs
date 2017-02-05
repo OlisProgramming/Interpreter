@@ -80,14 +80,20 @@ namespace PythonInterpreter.Exceptions
                     break;
             }
 
-            msg += "\n\nTraceback (most recent call last):\n";
+            msg += "\n\nTraceback (most recent call first):\n";
 
             Frame f = StackFrame;
+            Frame prev = null;
             do
             {
                 IEnumerable<string> lines = System.IO.File.ReadLines(f.FileName);
                 string line = lines.Skip(f.Line - 1).Take(1).First();
-                msg += $"Line {f.Line}, column {f.Column} of file {f.FileName}:\n{line}\n";
+
+                if ((f.Line != prev?.Line) || (f.Column != prev?.Column) || (f.FileName != prev?.FileName))
+                {
+                    msg += $"Line {f.Line}, column {f.Column} of file {f.FileName}:\n{line}\n";
+                    prev = f;
+                }
             } while ((f = f.PreviousFrame) != null);
 
             return msg + "\n--------\n\n";

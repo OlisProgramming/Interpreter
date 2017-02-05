@@ -38,11 +38,13 @@ namespace PythonInterpreter
                 Console.WriteLine("-----------------------------------------------\n\n\n");
 
                 Interpreter interpreter = new Interpreter();
-                Variable result = interpreter.Visit(expr);
+                Variable result = interpreter.Visit(expr, new Frame(1, 1, fileName, null));
             }
             catch (InterpreterException ex)
             {
                 Console.Error.WriteLine(ex);
+                /*Console.WriteLine();
+                Console.Error.WriteLine(ex.StackTrace);*/
             }
 
             Console.Write("Press any key to continue...");
