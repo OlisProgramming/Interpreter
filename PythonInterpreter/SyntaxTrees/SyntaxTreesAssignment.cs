@@ -17,4 +17,12 @@ namespace PythonInterpreter.SyntaxTrees
 
         }
     }
+
+    class AssignLetNode : UnaryOperationNode
+    {
+        public AssignLetNode(Token token, Node assignNode) : base(token, assignNode)
+        {
+
+        }
+    }
 }

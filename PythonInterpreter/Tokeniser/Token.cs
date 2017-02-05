@@ -21,6 +21,7 @@ namespace PythonInterpreter.TokeniserNamespace
             ASSIGN, SEMICOLON, CAST,
             OUT,
             IF, ELSE,
+            LET,
             IDENTIFIER,
             EOF
         }

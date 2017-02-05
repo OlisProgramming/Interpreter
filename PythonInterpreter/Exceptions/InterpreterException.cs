@@ -23,6 +23,7 @@ namespace PythonInterpreter.Exceptions
             INTERPRETER_INVALID_OPERATION,
             INTERPRETER_CANNOT_SET_READONLY_VARIABLE,
             INTERPRETER_VARIABLE_DOES_NOT_EXIST,
+            INTERPRETER_VARIABLE_EXISTS,
         }
 
         public InterpreterExceptionType Error { get; set; }
@@ -73,6 +74,10 @@ namespace PythonInterpreter.Exceptions
 
                 case InterpreterExceptionType.INTERPRETER_VARIABLE_DOES_NOT_EXIST:
                     msg += $"Variable {Details[0]} does not exist.";
+                    break;
+
+                case InterpreterExceptionType.INTERPRETER_VARIABLE_EXISTS:
+                    msg += $"Variable {Details[0]} exists, therefore it can not be used in a Let expression.";
                     break;
 
                 default:

@@ -15,7 +15,7 @@ namespace PythonInterpreter.InterpreterNamespace
 
         public Interpreter()
         {
-            env = new InterpreterEnvironment();
+            env = new InterpreterEnvironmentRoot();
         }
 
         public Variable Visit(Node node, Frame frame)
@@ -54,6 +54,8 @@ namespace PythonInterpreter.InterpreterNamespace
 
             if (node is AssignNode)
                 return VisitAssignNode(node as AssignNode, frame);
+            if (node is AssignLetNode)
+                return VisitAssignLetNode((node as AssignLetNode).Child as AssignNode, frame);
             if (node is PrintNode)
                 return VisitPrintNode(node as PrintNode, frame);
             if (node is CastNode)
@@ -118,6 +120,13 @@ namespace PythonInterpreter.InterpreterNamespace
             return v;
         }
 
+        private Variable VisitAssignLetNode(AssignNode node, Frame frame)
+        {
+            Variable v = Visit(node.Right, frame.Next(node.Right.Token));
+            env.LetVariable((node.Left as IdentifierNode).Value, v, frame);
+            return v;
+        }
+
         private Variable VisitPrintNode(PrintNode node, Frame frame)
         {
             Variable v = Visit(node.Child, frame.Next(node.Child.Token));
@@ -127,10 +136,12 @@ namespace PythonInterpreter.InterpreterNamespace
 
         private Variable VisitStatementListNode(StatementListNode node, Frame frame)
         {
+            env = new InterpreterEnvironment(env);
             foreach (Node statement in node.Statements)
             {
                 Variable val = Visit(statement, frame.Next(statement.Token));
             }
+            env = env.parent;
 
             return null;
         }

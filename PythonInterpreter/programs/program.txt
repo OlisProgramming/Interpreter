@@ -1,12 +1,18 @@
 {
-	a = 2;
-	b = 3;
-	c = 3;  # Set some variables
+	let a = 2;
+	let b = 3;
+	let c = 3;  # Set some variables
 
 	: a * b * c;
 	: a;
 	: b;
 	: c;
+
+	if true {
+		let d = 0;
+	}
+
+	: d;
 
 	: b < c;  # Print some equality and comparison tests
 	: b <= c;

@@ -11,42 +11,47 @@ namespace PythonInterpreter.InterpreterNamespace
     class InterpreterEnvironment
     {
         private Dictionary<string, Variable> variables;
-        private Dictionary<string, Variable> variablesBuiltin;
+        public InterpreterEnvironment parent { get; set; }
 
-        public InterpreterEnvironment()
+        public InterpreterEnvironment(InterpreterEnvironment parent)
         {
             variables = new Dictionary<string, Variable>();
-            variablesBuiltin = new Dictionary<string, Variable>();
-
-            variablesBuiltin.Add("true", new VariableBoolean(true));
-            variablesBuiltin.Add("false", new VariableBoolean(false));
+            this.parent = parent;
         }
 
-        public bool NameExists(string name, Frame frame)
+        public virtual bool NameExists(string name, Frame frame)
         {
-            return variables.ContainsKey(name) || variablesBuiltin.ContainsKey(name);
+            return variables.ContainsKey(name) || parent.NameExists(name, frame);
         }
 
-        public bool NameFree(string name, Frame frame)
+        public virtual bool NameFree(string name, Frame frame)
         {
             return !NameExists(name, frame);
         }
 
-        public void SetVariable(string name, Variable value, Frame frame)
+        public virtual void SetVariable(string name, Variable value, Frame frame)
         {
-            if (variablesBuiltin.ContainsKey(name))
+            if (variables.ContainsKey(name))
+                variables[name] = value;
+            else
+                parent.SetVariable(name, value, frame);
+        }
+
+        public virtual void LetVariable(string name, Variable value, Frame frame)
+        {
+            if (variables.ContainsKey(name))
                 throw new InterpreterException(
-                    InterpreterException.InterpreterExceptionType.INTERPRETER_CANNOT_SET_READONLY_VARIABLE,
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_VARIABLE_EXISTS,
                     frame,
                     name);
             variables[name] = value;
         }
 
-        public Variable GetVariable(string name, Frame frame)
+        public virtual Variable GetVariable(string name, Frame frame)
         {
             try
             {
-                return (variablesBuiltin.ContainsKey(name)) ? variablesBuiltin[name] : variables[name];
+                return (variables.ContainsKey(name)) ? variables[name] : parent.GetVariable(name, frame);
             }
             catch (KeyNotFoundException)
             {

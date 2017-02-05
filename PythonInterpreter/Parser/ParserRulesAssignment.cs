@@ -10,6 +10,14 @@ namespace PythonInterpreter.ParserNamespace
 {
     partial class Parser
     {
+        public Node AssignmentLetExpression()
+        {
+            Token tk = tokens[index];
+            Eat(Token.TokenType.LET);
+            Node node = AssignmentExpression();
+            return new AssignLetNode(tk, node);
+        }
+
         public Node AssignmentExpression()
         {
             Node node = Identifier();

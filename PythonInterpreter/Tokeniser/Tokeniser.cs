@@ -108,6 +108,8 @@ namespace PythonInterpreter.TokeniserNamespace
                         return new Token(Token.TokenType.IF, "if", new Frame(Line, Column, FileName, null));
                     else if (id == "else")
                         return new Token(Token.TokenType.ELSE, "else", new Frame(Line, Column, FileName, null));
+                    else if (id == "let")
+                        return new Token(Token.TokenType.LET, "let", new Frame(Line, Column, FileName, null));
                     else
                         return new Token(Token.TokenType.IDENTIFIER, id, new Frame(Line, Column, FileName, null));
                 }

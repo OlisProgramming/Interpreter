@@ -52,6 +52,11 @@ namespace PythonInterpreter.ParserNamespace
                 node = AssignmentExpression();
                 Eat(Token.TokenType.SEMICOLON);
             }
+            else if (tk.Type == Token.TokenType.LET)
+            {
+                node = AssignmentLetExpression();
+                Eat(Token.TokenType.SEMICOLON);
+            }
             else if (tk.Type == Token.TokenType.IF)
             {
                 node = IfStatement();
