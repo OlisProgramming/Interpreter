@@ -22,26 +22,23 @@ namespace PythonInterpreter.Exceptions
             INTERPRETER_NO_VISIT_METHOD,
             INTERPRETER_INVALID_OPERATION,
             INTERPRETER_CANNOT_SET_READONLY_VARIABLE,
+            INTERPRETER_VARIABLE_DOES_NOT_EXIST,
         }
 
         public InterpreterExceptionType Error { get; set; }
-        public Token TokenAt { get; set; }  // For debugging line/col of error.
+        public Frame StackFrame { get; set; }
         public string[] Details { get; set; }
 
-        public InterpreterException(InterpreterExceptionType error, Token token_at, params string[] details)
+        public InterpreterException(InterpreterExceptionType error, Frame stackFrame, params string[] details)
         {
             Error = error;
-            TokenAt = token_at;
+            StackFrame = stackFrame;
             Details = details;
         }
 
         public override string ToString()
         {
-            IEnumerable<string> lines = System.IO.File.ReadLines(TokenAt.FileName);
-            string line = lines.Skip(TokenAt.Line - 1).Take(1).First();
-
-            string msg = $"\n\n-----\n\nError caught at line {TokenAt.Line}, column {TokenAt.Column} of file {TokenAt.FileName}! "
-             + $"Erroneous line is:\n{line}\n" + "^".PadLeft(TokenAt.Column + 1) + "\n"
+            string msg = $"\n\n-----\n\nError caught at line {StackFrame.Line}, column {StackFrame.Column} of file {StackFrame.FileName}!\n"
              + $"Error code {((int)Error).ToString("D3")} ({Error}):\n";
 
             switch (Error)
@@ -51,7 +48,7 @@ namespace PythonInterpreter.Exceptions
                     break;
 
                 case InterpreterExceptionType.TOKENISER_UNRECOGNISED_TOKEN:
-                    msg += $"The token '{TokenAt.Value}' was unrecognised.";
+                    msg += $"The token '{Details[0]}' was unrecognised.";
                     break;
 
                 case InterpreterExceptionType.TOKENISER_TOO_MANY_DECIMAL_POINTS:
@@ -74,14 +71,26 @@ namespace PythonInterpreter.Exceptions
                     msg += $"Cannot set the value of the readonly variable {Details[0]}.";
                     break;
 
+                case InterpreterExceptionType.INTERPRETER_VARIABLE_DOES_NOT_EXIST:
+                    msg += $"Variable {Details[0]} does not exist.";
+                    break;
+
                 default:
                     msg += "No defined error message";
                     break;
             }
 
-            msg += "\n\n-----\n\n";
+            msg += "\n\nTraceback (most recent call last):\n";
 
-            return msg;
+            Frame f = StackFrame;
+            do
+            {
+                IEnumerable<string> lines = System.IO.File.ReadLines(f.FileName);
+                string line = lines.Skip(f.Line - 1).Take(1).First();
+                msg += $"Line {f.Line}, column {f.Column} of file {f.FileName}:\n{line}\n";
+            } while ((f = f.PreviousFrame) != null);
+
+            return msg + "\n--------\n\n";
         }
     }
 }

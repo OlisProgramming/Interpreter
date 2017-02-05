@@ -22,29 +22,39 @@ namespace PythonInterpreter.InterpreterNamespace
             variablesBuiltin.Add("false", new VariableBoolean(false));
         }
 
-        public bool NameExists(string name)
+        public bool NameExists(string name, Frame frame)
         {
             return variables.ContainsKey(name) || variablesBuiltin.ContainsKey(name);
         }
 
-        public bool NameFree(string name)
+        public bool NameFree(string name, Frame frame)
         {
-            return !NameExists(name);
+            return !NameExists(name, frame);
         }
 
-        public void SetVariable(string name, Variable value)
+        public void SetVariable(string name, Variable value, Frame frame)
         {
             if (variablesBuiltin.ContainsKey(name))
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_CANNOT_SET_READONLY_VARIABLE,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     name);
             variables[name] = value;
         }
 
-        public Variable GetVariable(string name)
+        public Variable GetVariable(string name, Frame frame)
         {
-            return (variablesBuiltin.ContainsKey(name))? variablesBuiltin[name] : variables[name];
+            try
+            {
+                return (variablesBuiltin.ContainsKey(name)) ? variablesBuiltin[name] : variables[name];
+            }
+            catch (KeyNotFoundException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_VARIABLE_DOES_NOT_EXIST,
+                    frame,
+                    name);
+            }
         }
     }
 }

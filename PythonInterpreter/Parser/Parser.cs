@@ -28,7 +28,7 @@ namespace PythonInterpreter.ParserNamespace
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.PARSER_EXPECTED_DIFFERENT_TOKEN,
-                    tokens[index],
+                    tokens[index].StackFrame,
                     type.ToString(), tokens[index].Type.ToString());
                 //Error($"Token type {type} was expected, but got {tokens[index].Type} instead.", tokens[index]);
             }

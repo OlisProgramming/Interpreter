@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PythonInterpreter.Exceptions;
 
 namespace PythonInterpreter.Variables
 {
@@ -17,31 +18,31 @@ namespace PythonInterpreter.Variables
             Value = value;
         }
 
-        public override Variable AddImpl(Variable other)
+        public override Variable AddImpl(Variable other, Frame frame)
         {
-            VariableNumber otherDouble = other.Cast("number") as VariableNumber;
+            VariableNumber otherDouble = other.Cast("number", frame) as VariableNumber;
             return new VariableNumber(Value + otherDouble.Value);
         }
 
-        public override Variable SubImpl(Variable other)
+        public override Variable SubImpl(Variable other, Frame frame)
         {
-            VariableNumber otherDouble = other.Cast("number") as VariableNumber;
+            VariableNumber otherDouble = other.Cast("number", frame) as VariableNumber;
             return new VariableNumber(Value - otherDouble.Value);
         }
 
-        public override Variable MulImpl(Variable other)
+        public override Variable MulImpl(Variable other, Frame frame)
         {
-            VariableNumber otherDouble = other.Cast("number") as VariableNumber;
+            VariableNumber otherDouble = other.Cast("number", frame) as VariableNumber;
             return new VariableNumber(Value * otherDouble.Value);
         }
 
-        public override Variable DivImpl(Variable other)
+        public override Variable DivImpl(Variable other, Frame frame)
         {
-            VariableNumber otherDouble = other.Cast("number") as VariableNumber;
+            VariableNumber otherDouble = other.Cast("number", frame) as VariableNumber;
             return new VariableNumber(Value / otherDouble.Value);
         }
 
-        public override Variable CastImpl(string typeToCast)
+        public override Variable CastImpl(string typeToCast, Frame frame)
         {
             if (typeToCast == "boolean") return new VariableBoolean(Value != 0);
 
@@ -53,44 +54,44 @@ namespace PythonInterpreter.Variables
             return Value.ToString();
         }
 
-        public override Variable UnaryPlusImpl(Variable other)
+        public override Variable UnaryPlusImpl(Frame frame)
         {
             return this;
         }
 
-        public override Variable UnaryMinusImpl(Variable other)
+        public override Variable UnaryMinusImpl(Frame frame)
         {
             return new VariableNumber(-Value);
         }
 
-        public override Variable LessThanImpl(Variable other)
+        public override Variable LessThanImpl(Variable other, Frame frame)
         {
-            return new VariableBoolean(Value < (other.Cast("number") as VariableNumber).Value);
+            return new VariableBoolean(Value < (other.Cast("number", frame) as VariableNumber).Value);
         }
 
-        public override Variable GreaterThanImpl(Variable other)
+        public override Variable GreaterThanImpl(Variable other, Frame frame)
         {
-            return new VariableBoolean(Value > (other.Cast("number") as VariableNumber).Value);
+            return new VariableBoolean(Value > (other.Cast("number", frame) as VariableNumber).Value);
         }
 
-        public override Variable LessThanOrEqualImpl(Variable other)
+        public override Variable LessThanOrEqualImpl(Variable other, Frame frame)
         {
-            return new VariableBoolean(Value <= (other.Cast("number") as VariableNumber).Value);
+            return new VariableBoolean(Value <= (other.Cast("number", frame) as VariableNumber).Value);
         }
 
-        public override Variable GreaterThanOrEqualImpl(Variable other)
+        public override Variable GreaterThanOrEqualImpl(Variable other, Frame frame)
         {
-            return new VariableBoolean(Value >= (other.Cast("number") as VariableNumber).Value);
+            return new VariableBoolean(Value >= (other.Cast("number", frame) as VariableNumber).Value);
         }
 
-        public override Variable EqualImpl(Variable other)
+        public override Variable EqualImpl(Variable other, Frame frame)
         {
-            return new VariableBoolean(Value == (other.Cast("number") as VariableNumber).Value);
+            return new VariableBoolean(Value == (other.Cast("number", frame) as VariableNumber).Value);
         }
 
-        public override Variable NotEqualImpl(Variable other)
+        public override Variable NotEqualImpl(Variable other, Frame frame)
         {
-            return new VariableBoolean(Value != (other.Cast("number") as VariableNumber).Value);
+            return new VariableBoolean(Value != (other.Cast("number", frame) as VariableNumber).Value);
         }
     }
 }

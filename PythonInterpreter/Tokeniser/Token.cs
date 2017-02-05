@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PythonInterpreter.Exceptions;
 
 namespace PythonInterpreter.TokeniserNamespace
 {
@@ -26,19 +27,15 @@ namespace PythonInterpreter.TokeniserNamespace
 
         public TokenType Type { get; set; }
         public string Value { get; set; }
-        public int Line { get; set; }
-        public int Column { get; set; }
-        public string FileName { get; set; }
+        public Frame StackFrame { get; set; }
 
-        public Token(TokenType type, string value) : this(type, value, 0, 0, "") { }
+        public Token(TokenType type, string value) : this(type, value, new Frame(0, 0, "", null)) { }
 
-        public Token(TokenType type, string value, int line, int column, string fileName)
+        public Token(TokenType type, string value, Frame frame)
         {
             Type = type;
             Value = value;
-            Line = line;
-            Column = column;
-            FileName = fileName;
+            StackFrame = frame;
         }
 
         public override string ToString()

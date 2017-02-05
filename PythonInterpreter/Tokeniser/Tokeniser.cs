@@ -80,7 +80,7 @@ namespace PythonInterpreter.TokeniserNamespace
                     if (decimalPointUsed)
                         throw new InterpreterException(
                             InterpreterException.InterpreterExceptionType.TOKENISER_TOO_MANY_DECIMAL_POINTS,
-                            new Token(Token.TokenType.EOF, "", Line, Column, FileName));
+                            new Frame(Line, Column, FileName, null));
                     decimalPointUsed = true;
                 }
                 Advance();
@@ -99,112 +99,113 @@ namespace PythonInterpreter.TokeniserNamespace
                 }
                 else if (char.IsDigit(CurrentChar))
                 {
-                    return new Token(Token.TokenType.NUMBER, GetNextNumericValue(), Line, Column, FileName);
+                    return new Token(Token.TokenType.NUMBER, GetNextNumericValue(), new Frame(Line, Column, FileName, null));
                 }
                 else if (char.IsLetter(CurrentChar))
                 {
                     string id = GetNextIdentifierValue();
                     if (id == "if")
-                        return new Token(Token.TokenType.IF, "if", Line, Column, FileName);
+                        return new Token(Token.TokenType.IF, "if", new Frame(Line, Column, FileName, null));
                     else if (id == "else")
-                        return new Token(Token.TokenType.ELSE, "else", Line, Column, FileName);
+                        return new Token(Token.TokenType.ELSE, "else", new Frame(Line, Column, FileName, null));
                     else
-                        return new Token(Token.TokenType.IDENTIFIER, id, Line, Column, FileName);
+                        return new Token(Token.TokenType.IDENTIFIER, id, new Frame(Line, Column, FileName, null));
                 }
                 switch (CurrentChar)
                 {
                     case '+':
                         Advance();
-                        return new Token(Token.TokenType.ADD, "+", Line, Column, FileName);
+                        return new Token(Token.TokenType.ADD, "+", new Frame(Line, Column, FileName, null));
 
                     case '-':
                         Advance();
                         if (CurrentChar == '>')
                         {
                             Advance();
-                            return new Token(Token.TokenType.CAST, "->", Line, Column, FileName);
+                            return new Token(Token.TokenType.CAST, "->", new Frame(Line, Column, FileName, null));
                         }
-                        return new Token(Token.TokenType.SUB, "-", Line, Column, FileName);
+                        return new Token(Token.TokenType.SUB, "-", new Frame(Line, Column, FileName, null));
 
                     case '*':
                         Advance();
-                        return new Token(Token.TokenType.MUL, "*", Line, Column, FileName);
+                        return new Token(Token.TokenType.MUL, "*", new Frame(Line, Column, FileName, null));
 
                     case '/':
                         Advance();
-                        return new Token(Token.TokenType.DIV, "/", Line, Column, FileName);
+                        return new Token(Token.TokenType.DIV, "/", new Frame(Line, Column, FileName, null));
 
                     case '(':
                         Advance();
-                        return new Token(Token.TokenType.LPARENTH, "(", Line, Column, FileName);
+                        return new Token(Token.TokenType.LPARENTH, "(", new Frame(Line, Column, FileName, null));
 
                     case ')':
                         Advance();
-                        return new Token(Token.TokenType.RPARENTH, ")", Line, Column, FileName);
+                        return new Token(Token.TokenType.RPARENTH, ")", new Frame(Line, Column, FileName, null));
 
                     case '{':
                         Advance();
-                        return new Token(Token.TokenType.LBRACE, "{", Line, Column, FileName);
+                        return new Token(Token.TokenType.LBRACE, "{", new Frame(Line, Column, FileName, null));
 
                     case '}':
                         Advance();
-                        return new Token(Token.TokenType.RBRACE, "}", Line, Column, FileName);
+                        return new Token(Token.TokenType.RBRACE, "}", new Frame(Line, Column, FileName, null));
 
                     case '=':
                         Advance();
                         if (CurrentChar == '=')
                         {
                             Advance();
-                            return new Token(Token.TokenType.EQUAL, "==", Line, Column, FileName);
+                            return new Token(Token.TokenType.EQUAL, "==", new Frame(Line, Column, FileName, null));
                         }
-                        return new Token(Token.TokenType.ASSIGN, "=", Line, Column, FileName);
+                        return new Token(Token.TokenType.ASSIGN, "=", new Frame(Line, Column, FileName, null));
 
                     case '!':
                         Advance();
                         if (CurrentChar == '=')
                         {
                             Advance();
-                            return new Token(Token.TokenType.NOT_EQUAL, "!=", Line, Column, FileName);
+                            return new Token(Token.TokenType.NOT_EQUAL, "!=", new Frame(Line, Column, FileName, null));
                         }
                         throw new InterpreterException(
                             InterpreterException.InterpreterExceptionType.TOKENISER_UNRECOGNISED_TOKEN,
-                            new Token(Token.TokenType.EOF, new string(CurrentChar, 1), Line, Column, FileName));
+                            new Frame(Line, Column, FileName, null));
 
                     case ';':
                         Advance();
-                        return new Token(Token.TokenType.SEMICOLON, ";", Line, Column, FileName);
+                        return new Token(Token.TokenType.SEMICOLON, ";", new Frame(Line, Column, FileName, null));
 
                     case ':':
                         Advance();
-                        return new Token(Token.TokenType.OUT, ":", Line, Column, FileName);
+                        return new Token(Token.TokenType.OUT, ":", new Frame(Line, Column, FileName, null));
 
                     case '<':
                         Advance();
                         if (CurrentChar == '=')
                         {
                             Advance();
-                            return new Token(Token.TokenType.LESS_OR_EQUAL, "<=", Line, Column, FileName);
+                            return new Token(Token.TokenType.LESS_OR_EQUAL, "<=", new Frame(Line, Column, FileName, null));
                         }
-                        return new Token(Token.TokenType.LESS_THAN, "<", Line, Column, FileName);
+                        return new Token(Token.TokenType.LESS_THAN, "<", new Frame(Line, Column, FileName, null));
 
                     case '>':
                         Advance();
                         if (CurrentChar == '=')
                         {
                             Advance();
-                            return new Token(Token.TokenType.GREATER_OR_EQUAL, ">=", Line, Column, FileName);
+                            return new Token(Token.TokenType.GREATER_OR_EQUAL, ">=", new Frame(Line, Column, FileName, null));
                         }
-                        return new Token(Token.TokenType.GREATER_THAN, ">", Line, Column, FileName);
+                        return new Token(Token.TokenType.GREATER_THAN, ">", new Frame(Line, Column, FileName, null));
 
 
                     default:
                         throw new InterpreterException(
                             InterpreterException.InterpreterExceptionType.TOKENISER_UNRECOGNISED_TOKEN,
-                            new Token(Token.TokenType.EOF, new string(CurrentChar, 1), Line, Column, FileName));
+                            new Frame(Line, Column, FileName, null),
+                            new string(CurrentChar, 1));
                 }
             }
 
-            return new Token(Token.TokenType.EOF, "", Line, Column, FileName);
+            return new Token(Token.TokenType.EOF, "", new Frame(Line, Column, FileName, null));
         }
 
         public List<Token> Tokenise()

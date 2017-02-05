@@ -12,6 +12,7 @@ namespace PythonInterpreter.InterpreterNamespace
     class Interpreter
     {
         private InterpreterEnvironment env;
+        private Frame frame;
 
         public Interpreter()
         {
@@ -67,28 +68,28 @@ namespace PythonInterpreter.InterpreterNamespace
 
             throw new InterpreterException(
                 InterpreterException.InterpreterExceptionType.INTERPRETER_NO_VISIT_METHOD,
-                node.Token,
+                frame,
                 node.ToString(), node.GetType().Name);
         }
 
         private Variable VisitAddNode(AddNode node)
         {
-            return Visit(node.Left) + Visit(node.Right);
+            return Visit(node.Left).Add(Visit(node.Right), frame);
         }
 
         private Variable VisitSubNode(SubNode node)
         {
-            return Visit(node.Left) - Visit(node.Right);
+            return Visit(node.Left).Sub(Visit(node.Right), frame);
         }
 
         private Variable VisitMulNode(MulNode node)
         {
-            return Visit(node.Left) * Visit(node.Right);
+            return Visit(node.Left).Mul(Visit(node.Right), frame);
         }
 
         private Variable VisitDivNode(DivNode node)
         {
-            return Visit(node.Left) / Visit(node.Right);
+            return Visit(node.Left).Div(Visit(node.Right), frame);
         }
 
         private Variable VisitNumberNode(NumberNode node)
@@ -98,23 +99,23 @@ namespace PythonInterpreter.InterpreterNamespace
 
         private Variable VisitIdentifierNode(IdentifierNode node)
         {
-            return env.GetVariable(node.Value);
+            return env.GetVariable(node.Value, frame);
         }
 
         private Variable VisitUnaryPlusNode(UnaryPlusNode node)
         {
-            return Visit(node.Child);
+            return Visit(node.Child).UnaryPlus(frame);
         }
 
         private Variable VisitUnaryMinusNode(UnaryMinusNode node)
         {
-            return Visit(node.Child) * new VariableNumber(-1.0);  // TODO unary minus
+            return Visit(node.Child).UnaryMinus(frame);  // TODO unary minus
         }
 
         private Variable VisitAssignNode(AssignNode node)
         {
             Variable v = Visit(node.Right);
-            env.SetVariable((node.Left as IdentifierNode).Value, v);
+            env.SetVariable((node.Left as IdentifierNode).Value, v, frame);
             return v;
         }
 
@@ -138,12 +139,12 @@ namespace PythonInterpreter.InterpreterNamespace
         private Variable VisitCastNode(CastNode node)
         {
             Variable val = Visit(node.Child);
-            return val.Cast(node.TypeToCast);
+            return val.Cast(node.TypeToCast, frame);
         }
 
         private Variable VisitIfNode(IfNode node)
         {
-            VariableBoolean condition = (Visit(node.Left).Cast("boolean")) as VariableBoolean;
+            VariableBoolean condition = (Visit(node.Left).Cast("boolean", frame)) as VariableBoolean;
             if (condition.Value)
                 Visit(node.Mid);
             else
@@ -153,32 +154,32 @@ namespace PythonInterpreter.InterpreterNamespace
 
         private Variable VisitLessThanNode(LessThanNode node)
         {
-            return Visit(node.Left).LessThan(Visit(node.Right));
+            return Visit(node.Left).LessThan(Visit(node.Right), frame);
         }
 
         private Variable VisitGreaterThanNode(GreaterThanNode node)
         {
-            return Visit(node.Left).GreaterThan(Visit(node.Right));
+            return Visit(node.Left).GreaterThan(Visit(node.Right), frame);
         }
 
         private Variable VisitLessThanOrEqualNode(LessThanOrEqualNode node)
         {
-            return Visit(node.Left).LessThanOrEqual(Visit(node.Right));
+            return Visit(node.Left).LessThanOrEqual(Visit(node.Right), frame);
         }
 
         private Variable VisitGreaterThanOrEqualNode(GreaterThanOrEqualNode node)
         {
-            return Visit(node.Left).GreaterThanOrEqual(Visit(node.Right));
+            return Visit(node.Left).GreaterThanOrEqual(Visit(node.Right), frame);
         }
 
         private Variable VisitEqualNode(EqualNode node)
         {
-            return Visit(node.Left).Equal(Visit(node.Right));
+            return Visit(node.Left).Equal(Visit(node.Right), frame);
         }
 
         private Variable VisitNotEqualNode(NotEqualNode node)
         {
-            return Visit(node.Left).NotEqual(Visit(node.Right));
+            return Visit(node.Left).NotEqual(Visit(node.Right), frame);
         }
     }
 }

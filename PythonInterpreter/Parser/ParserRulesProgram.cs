@@ -60,7 +60,7 @@ namespace PythonInterpreter.ParserNamespace
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.PARSER_EXPECTED_DIFFERENT_TOKEN,
-                    new Token(Token.TokenType.EOF, ""),
+                    tk.StackFrame,
                     "IF or OUT or IDENTIFIER", tk.Type.ToString());
 
             }

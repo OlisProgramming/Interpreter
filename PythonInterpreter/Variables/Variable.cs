@@ -17,268 +17,253 @@ namespace PythonInterpreter.Variables
             this.typeName = typeName;
         }
 
-        public Variable Add(Variable other)
+        public Variable Add(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = AddImpl(other);
+                result = AddImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "Add", TypeName);
             }
 
             return result;
         }
-        public static Variable operator +(Variable self, Variable other)
-        {
-            return self.Add(other);
-        }
-        public abstract Variable AddImpl(Variable other);
 
-        public Variable Sub(Variable other)
+        public abstract Variable AddImpl(Variable other, Frame frame);
+
+        public Variable Sub(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = SubImpl(other);
+                result = SubImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "Sub", TypeName);
             }
 
             return result;
         }
-        public static Variable operator -(Variable self, Variable other)
-        {
-            return self.Sub(other);
-        }
-        public abstract Variable SubImpl(Variable other);
+        public abstract Variable SubImpl(Variable other, Frame frame);
 
-        public Variable Mul(Variable other)
+        public Variable Mul(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = MulImpl(other);
+                result = MulImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "Mul", TypeName);
             }
 
             return result;
         }
-        public static Variable operator *(Variable self, Variable other)
-        {
-            return self.Mul(other);
-        }
-        public abstract Variable MulImpl(Variable other);
+        public abstract Variable MulImpl(Variable other, Frame frame);
 
-        public Variable Div(Variable other)
+        public Variable Div(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = DivImpl(other);
+                result = DivImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "Div", TypeName);
             }
 
             return result;
         }
-        public static Variable operator /(Variable self, Variable other)
-        {
-            return self.Div(other);
-        }
-        public abstract Variable DivImpl(Variable other);
+        public abstract Variable DivImpl(Variable other, Frame frame);
 
-        public Variable UnaryPlus(Variable other)
+        public Variable UnaryPlus(Frame frame)
         {
             Variable result;
             try
             {
-                result = UnaryPlusImpl(other);
+                result = UnaryPlusImpl(frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "UnaryPlus", TypeName);
             }
 
             return result;
         }
-        public abstract Variable UnaryPlusImpl(Variable other);
+        public abstract Variable UnaryPlusImpl(Frame frame);
 
-        public Variable UnaryMinus(Variable other)
+        public Variable UnaryMinus(Frame frame)
         {
             Variable result;
             try
             {
-                result = UnaryMinusImpl(other);
+                result = UnaryMinusImpl(frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "UnaryMinus", TypeName);
             }
 
             return result;
         }
-        public abstract Variable UnaryMinusImpl(Variable other);
+        public abstract Variable UnaryMinusImpl(Frame frame);
 
-        public Variable LessThan(Variable other)
+        public Variable LessThan(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = LessThanImpl(other);
+                result = LessThanImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "LessThan", TypeName);
             }
 
             return result;
         }
-        public abstract Variable LessThanImpl(Variable other);
+        public abstract Variable LessThanImpl(Variable other, Frame frame);
 
-        public Variable GreaterThan(Variable other)
+        public Variable GreaterThan(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = GreaterThanImpl(other);
+                result = GreaterThanImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "GreaterThan", TypeName);
             }
 
             return result;
         }
-        public abstract Variable GreaterThanImpl(Variable other);
+        public abstract Variable GreaterThanImpl(Variable other, Frame frame);
 
-        public Variable LessThanOrEqual(Variable other)
+        public Variable LessThanOrEqual(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = LessThanOrEqualImpl(other);
+                result = LessThanOrEqualImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "LessThanOrEqual", TypeName);
             }
 
             return result;
         }
-        public abstract Variable LessThanOrEqualImpl(Variable other);
+        public abstract Variable LessThanOrEqualImpl(Variable other, Frame frame);
 
-        public Variable GreaterThanOrEqual(Variable other)
+        public Variable GreaterThanOrEqual(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = GreaterThanOrEqualImpl(other);
+                result = GreaterThanOrEqualImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "GreaterThanOrEqual", TypeName);
             }
 
             return result;
         }
-        public abstract Variable GreaterThanOrEqualImpl(Variable other);
+        public abstract Variable GreaterThanOrEqualImpl(Variable other, Frame frame);
 
-        public Variable Equal(Variable other)
+        public Variable Equal(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = EqualImpl(other);
+                result = EqualImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "Equal", TypeName);
             }
 
             return result;
         }
-        public abstract Variable EqualImpl(Variable other);
+        public abstract Variable EqualImpl(Variable other, Frame frame);
 
-        public Variable NotEqual(Variable other)
+        public Variable NotEqual(Variable other, Frame frame)
         {
             Variable result;
             try
             {
-                result = NotEqualImpl(other);
+                result = NotEqualImpl(other, frame);
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     "NotEqual", TypeName);
             }
 
             return result;
         }
-        public abstract Variable NotEqualImpl(Variable other);
+        public abstract Variable NotEqualImpl(Variable other, Frame frame);
 
         ///////////////
 
-        public Variable Cast(string typeToCast)
+        public Variable Cast(string typeToCast, Frame frame)
         {
             try
             {
                 if (typeName != typeToCast)
-                    return CastImpl(typeToCast);
+                    return CastImpl(typeToCast, frame);
                 return this;
             }
             catch (NotImplementedException)
             {
                 throw new InterpreterException(
                     InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
-                    new TokeniserNamespace.Token(TokeniserNamespace.Token.TokenType.EOF, ""),
+                    frame,
                     $"Cast({typeToCast})", TypeName);
             }
         }
-        public abstract Variable CastImpl(string typeToCast);
+        public abstract Variable CastImpl(string typeToCast, Frame frame);
     }
 }
