@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Exceptions\Frame.cs" />
     <Compile Include="Interpreter\InterpreterEnvironmentRoot.cs" />
+    <Compile Include="Interpreter\InterpreterVisitorsArithmetic.cs" />
+    <Compile Include="Interpreter\InterpreterVisitorsAssignment.cs" />
+    <Compile Include="Interpreter\InterpreterVisitorsControl.cs" />
     <Compile Include="Parser\ParserRulesCondition.cs" />
     <Compile Include="SyntaxTrees\SyntaxTree.cs" />
     <Compile Include="Exceptions\InterpreterException.cs" />
@@ -52,10 +55,10 @@
     <Compile Include="Parser\ParserRulesAssignment.cs" />
     <Compile Include="Parser\ParserRulesArithmetic.cs" />
     <Compile Include="Interpreter\InterpreterEnvironment.cs" />
-    <Compile Include="Parser\ParserRulesProgram.cs" />
+    <Compile Include="Parser\ParserRulesControl.cs" />
     <Compile Include="SyntaxTrees\SyntaxTreesAssignment.cs" />
     <Compile Include="SyntaxTrees\SyntaxTreesArithmetic.cs" />
-    <Compile Include="SyntaxTrees\SyntaxTreesProgram.cs" />
+    <Compile Include="SyntaxTrees\SyntaxTreesControl.cs" />
     <Compile Include="Tokeniser\Tokeniser.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Program.cs" />
