@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PythonInterpreter.Variables;
 using PythonInterpreter.SyntaxTrees;
+using PythonInterpreter.Exceptions;
 
 namespace PythonInterpreter.InterpreterNamespace
 {

@@ -8,6 +8,7 @@ using PythonInterpreter.TokeniserNamespace;
 using PythonInterpreter.SyntaxTrees;
 using PythonInterpreter.ParserNamespace;
 using PythonInterpreter.InterpreterNamespace;
+using PythonInterpreter.Exceptions;
 
 namespace PythonInterpreter
 {

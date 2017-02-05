@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PythonInterpreter.TokeniserNamespace;
+using PythonInterpreter.Exceptions;
 
 namespace PythonInterpreter.ParserNamespace
 {

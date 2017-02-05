@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PythonInterpreter.TokeniserNamespace;
 
-namespace PythonInterpreter
+namespace PythonInterpreter.Exceptions
 {
     class InterpreterException : Exception
     {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PythonInterpreter.SyntaxTrees;
 using PythonInterpreter.TokeniserNamespace;
+using PythonInterpreter.Exceptions;
 
 namespace PythonInterpreter.ParserNamespace
 {

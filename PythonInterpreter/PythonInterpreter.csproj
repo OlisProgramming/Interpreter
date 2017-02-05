@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Parser\ParserRulesCondition.cs" />
     <Compile Include="SyntaxTrees\SyntaxTree.cs" />
-    <Compile Include="InterpreterException.cs" />
+    <Compile Include="Exceptions\InterpreterException.cs" />
     <Compile Include="Interpreter\Interpreter.cs" />
     <Compile Include="Parser\ParserRulesAssignment.cs" />
     <Compile Include="Parser\ParserRulesArithmetic.cs" />
