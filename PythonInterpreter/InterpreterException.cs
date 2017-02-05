@@ -41,7 +41,7 @@ namespace PythonInterpreter
             string line = lines.Skip(TokenAt.Line - 1).Take(1).First();
 
             string msg = $"\n\n-----\n\nError caught at line {TokenAt.Line}, column {TokenAt.Column} of file {TokenAt.FileName}! "
-             + $"Erroneous line is:\n\t{line}\n"
+             + $"Erroneous line is:\n{line}\n" + "^".PadLeft(TokenAt.Column + 1) + "\n"
              + $"Error code {((int)Error).ToString("D3")} ({Error}):\n";
 
             switch (Error)
