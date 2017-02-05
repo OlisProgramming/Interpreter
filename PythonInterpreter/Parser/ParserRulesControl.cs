@@ -49,7 +49,10 @@ namespace PythonInterpreter.ParserNamespace
             }
             else if (tk.Type == Token.TokenType.IDENTIFIER)
             {
-                node = AssignmentExpression();
+                if (tokens[index].Type == Token.TokenType.ASSIGN)
+                    node = AssignmentExpression();
+                else
+                    node = FunctionExpression();
                 Eat(Token.TokenType.SEMICOLON);
             }
             else if (tk.Type == Token.TokenType.LET)
@@ -71,6 +74,15 @@ namespace PythonInterpreter.ParserNamespace
             }
 
             return node;
+        }
+
+        private Node FunctionExpression()
+        {
+            Token tk = tokens[index];
+            Node node = Identifier();
+            Eat(Token.TokenType.LPARENTH);
+            Eat(Token.TokenType.RPARENTH);
+            return new FunctionNode(tk, node);
         }
 
         public Node PrintStatement()

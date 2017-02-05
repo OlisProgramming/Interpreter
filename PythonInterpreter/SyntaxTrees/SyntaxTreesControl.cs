@@ -43,6 +43,14 @@ namespace PythonInterpreter.SyntaxTrees
         }
     }
 
+    class FunctionNode : UnaryOperationNode
+    {
+        public FunctionNode(Token token, Node child) : base(token, child)
+        {
+
+        }
+    }
+
     class CastNode : UnaryOperationNode
     {
         public string TypeToCast { get; set; }

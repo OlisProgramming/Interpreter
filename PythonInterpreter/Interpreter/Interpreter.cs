@@ -60,6 +60,8 @@ namespace PythonInterpreter.InterpreterNamespace
                 return VisitPrintNode(node as PrintNode, frame);
             if (node is CastNode)
                 return VisitCastNode(node as CastNode, frame);
+            if (node is FunctionNode)
+                return VisitFunctionNode(node as FunctionNode, frame);
 
             if (node is IfNode)
                 return VisitIfNode(node as IfNode, frame);

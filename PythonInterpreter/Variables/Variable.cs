@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PythonInterpreter.InterpreterNamespace;
 using PythonInterpreter.Exceptions;
 
 namespace PythonInterpreter.Variables
@@ -265,5 +266,21 @@ namespace PythonInterpreter.Variables
             }
         }
         public abstract Variable CastImpl(string typeToCast, Frame frame);
+
+        public Variable Call(Interpreter interpreter, Frame frame)
+        {
+            try
+            {
+                return CallImpl(interpreter, frame);
+            }
+            catch (NotImplementedException)
+            {
+                throw new InterpreterException(
+                    InterpreterException.InterpreterExceptionType.INTERPRETER_INVALID_OPERATION,
+                    frame,
+                    "Call", TypeName);
+            }
+        }
+        public abstract Variable CallImpl(Interpreter interpreter, Frame frame);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PythonInterpreter.Exceptions;
+using PythonInterpreter.InterpreterNamespace;
 
 namespace PythonInterpreter.Variables
 {
@@ -89,6 +90,11 @@ namespace PythonInterpreter.Variables
         public override Variable NotEqualImpl(Variable other, Frame frame)
         {
             return new VariableBoolean(Value != (other.Cast("boolean", frame) as VariableBoolean).Value);
+        }
+
+        public override Variable CallImpl(Interpreter interpreter, Frame frame)
+        {
+            throw new NotImplementedException();
         }
     }
 }

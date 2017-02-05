@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PythonInterpreter.TokeniserNamespace;
+using PythonInterpreter.SyntaxTrees;
 using PythonInterpreter.Variables;
 using PythonInterpreter.Exceptions;
 
@@ -17,6 +19,10 @@ namespace PythonInterpreter.InterpreterNamespace
             variables = new Dictionary<string, Variable>();
             variables.Add("true", new VariableBoolean(true));
             variables.Add("false", new VariableBoolean(false));
+            Token empty = new Token(Token.TokenType.EOF, "");
+            StatementListNode node = new StatementListNode(empty);
+            node.AddStatement(new PrintNode(empty, new NumberNode(new Token(Token.TokenType.NUMBER, "1234567890"))));
+            variables.Add("print", new VariableCallable(node));
         }
 
         public override bool NameExists(string name, Frame frame)

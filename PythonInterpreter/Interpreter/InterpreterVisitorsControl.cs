@@ -45,5 +45,10 @@ namespace PythonInterpreter.InterpreterNamespace
                 Visit(node.Right, frame.Next(node.Right.Token));
             return condition;
         }
+
+        private Variable VisitFunctionNode(FunctionNode node, Frame frame)
+        {
+            return Visit(node.Child, frame.Next(node.Child.Token)).Call(this, frame.Next(node.Child.Token));
+        }
     }
 }
